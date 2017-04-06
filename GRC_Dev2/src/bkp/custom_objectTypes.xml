@@ -1,0 +1,673 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../xsd/custom.xsd">
+    
+    <objectType id="RISK" xmlexport="true" extends="RECURRING"
+                displayAttribute="name" descriptionAttributes="description" licensedComponentIds="tm,rm,il,in"
+                mashzoneId="40" arisImportRole="riskmanager" image="iconlib/icons/content/risk_16.png">
+        
+        <enumAttrType id="risktype" enumeration="risktype"/>
+        <stringAttrType id="risk_id" maxCharCount="80">
+            <validate name="maxlength" arg0="80"/>
+        </stringAttrType>
+        <textAttrType id="description" isMassEditable="true"/>
+        <listAttrType id="process" maxSize="1" objectType.idref="HIERARCHY" linkType="47">
+            <listRestriction>
+                <attributeRestriction attribute="type" value="process"/>
+            </listRestriction>
+        </listAttrType>
+        <listAttrType id="finaccount" objectType.idref="HIERARCHY" linkType="48">
+            <listRestriction>
+                <attributeRestriction attribute="type" value="financialaccount"/>
+            </listRestriction>
+        </listAttrType>
+        <enumAttrType id="impact" enumeration="impact" defaultValue="0"/>
+        <enumAttrType id="probability" enumeration="probability" defaultValue="0"/>
+        <stringAttrType id="risk_catalog1" maxCharCount="200" isMassEditable="true">
+            <validate name="maxlength" arg0="200"/>
+        </stringAttrType>
+        <stringAttrType id="risk_catalog2" maxCharCount="200" isMassEditable="true">
+            <validate name="maxlength" arg0="200"/>
+        </stringAttrType>
+        <listAttrType id="documents" objectType.idref="DOCUMENT" linkType="5"/>
+        <listAttrType id="controls" objectType.idref="CONTROL" linkType="4"/>
+        <listAttrType id="manager_group" maxSize="1" objectType.idref="USERGROUP" linkType="52" >
+            <listRestriction>
+                <attributeRestriction attribute="role" value="riskmanager"/>
+                <attributeRestriction attribute="rolelevel" value="object"/>
+            </listRestriction>
+        </listAttrType>
+        <enumAttrType id="assertions" enumeration="assertion"/>
+        <!-- op Risk attributes-->
+        <booleanAttrType id="risk_management_relevant" defaultValue="true"/>
+        <textAttrType id="assessment_activities"/>
+        <enumAttrType id="frequency" enumeration="frequency_including_none" defaultValue="7"/>
+        <booleanAttrType id="event_driven_allowed" defaultValue="true"/>
+        <listAttrType id="owner_group" maxSize="1" objectType.idref="USERGROUP" linkType="3160">
+            <listRestriction>
+                <attributeRestriction attribute="role" value="riskowner"/>
+                <attributeRestriction attribute="rolelevel" value="object"/>
+            </listRestriction>
+        </listAttrType>
+        <listAttrType id="reviewer_group" maxSize="1" objectType.idref="USERGROUP" linkType="3161">
+            <listRestriction>
+                <attributeRestriction attribute="role" value="riskreviewer"/>
+                <attributeRestriction attribute="rolelevel" value="object"/>
+            </listRestriction>
+        </listAttrType>
+        <listAttrType id="risk_category" objectType.idref="HIERARCHY" linkType="3162">
+            <listRestriction>
+                <attributeRestriction attribute="type" value="category"/>
+            </listRestriction>
+        </listAttrType>
+        <listAttrType id="orgunit" objectType.idref="HIERARCHY" linkType="3163">
+            <listRestriction>
+                <attributeRestriction attribute="type" value="orgunit"/>
+            </listRestriction>
+        </listAttrType>
+        <listAttrType id="appsystem" objectType.idref="HIERARCHY" linkType="3164">
+            <listRestriction>
+                <attributeRestriction attribute="type" value="applicationsystemtype"/>
+            </listRestriction>
+        </listAttrType>
+        <enumAttrType id="currency" enumeration="currency" defaultValue="0"/>
+        <!-- Threshold values of op risk management -->
+        <doubleAttrType id="th_exp_avg_loss">
+            <validate name="double" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="double" arg0="leq:999999999999999:value.must.not.be.greater.than.bound.ERR"/>
+            <validate name="double" arg0="scale:2:value.must.have.at.most.decimal.places.ERR"/>
+        </doubleAttrType>
+        <doubleAttrType id="th_exp_max_loss">
+            <validate name="double" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="double" arg0="leq:999999999999999:value.must.not.be.greater.than.bound.ERR"/>
+            <validate name="double" arg0="scale:2:value.must.have.at.most.decimal.places.ERR"/>
+        </doubleAttrType>
+        <doubleAttrType id="th_exp_min_loss">
+            <validate name="double" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="double" arg0="leq:999999999999999:value.must.not.be.greater.than.bound.ERR"/>
+            <validate name="double" arg0="scale:2:value.must.have.at.most.decimal.places.ERR"/>
+        </doubleAttrType>
+        <doubleAttrType id="th_red_exp_avg_loss">
+            <validate name="double" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="double" arg0="leq:999999999999999:value.must.not.be.greater.than.bound.ERR"/>
+            <validate name="double" arg0="scale:2:value.must.have.at.most.decimal.places.ERR"/>
+        </doubleAttrType>
+        <doubleAttrType id="th_red_exp_max_loss">
+            <validate name="double" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="double" arg0="leq:999999999999999:value.must.not.be.greater.than.bound.ERR"/>
+            <validate name="double" arg0="scale:2:value.must.have.at.most.decimal.places.ERR"/>
+        </doubleAttrType>
+        <doubleAttrType id="th_red_exp_min_loss">
+            <validate name="double" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="double" arg0="leq:999999999999999:value.must.not.be.greater.than.bound.ERR"/>
+            <validate name="double" arg0="scale:2:value.must.have.at.most.decimal.places.ERR"/>
+        </doubleAttrType>
+        <enumAttrType id="notification_to" enumeration="assessment_notification"/>
+
+        <booleanAttrType id="rm_notifications_quantitative" defaultValue="false"/>
+        <doubleAttrType id="th_impact_score">
+            <validate name="double" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="double" arg0="leq:999999999999999:value.must.not.be.greater.than.bound.ERR"/>
+            <validate name="double" arg0="scale:2:value.must.have.at.most.decimal.places.ERR"/>
+        </doubleAttrType>
+        <doubleAttrType id="th_red_impact_score">
+            <validate name="double" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="double" arg0="leq:999999999999999:value.must.not.be.greater.than.bound.ERR"/>
+            <validate name="double" arg0="scale:2:value.must.have.at.most.decimal.places.ERR"/>
+        </doubleAttrType>
+        <booleanAttrType id="rm_notifications_qualitative" defaultValue="false"/>
+        
+        <!-- Inicio GAP GRC29 -->
+        
+        <!-- Inserção do Atributo "Exportação Relevante" -->
+        <booleanAttrType id="export_relevant" defaultValue="true" />
+        
+        <!-- Inserção do Atributo "Causa" -->
+        <!-- <textAttrType id="cause" isMassEditable="true" propertyKey="attribute.RISK.cause.DBI"/> -->
+        <textAttrType id="cause" behavesLike="description" propertyKey="attribute.RISK.cause.DBI"/>
+        
+        <!-- Inserção do Atributo "Consequencia" -->
+        <textAttrType id="consequence" behavesLike="description" propertyKey="attribute.RISK.consequence.DBI"/>
+
+        
+        <!-- Inserção do Atributo "Relevante para Gestão de Risco" -->
+        <!--
+        <booleanAttrType id="manage_relevant" defaultValue="true" />
+        -->
+        
+        <!-- Inserção do Atributo "Frequencia de Avaliação" -->
+        <!-- 
+        <stringAttrType id="freq_eval" defaultValue="Anual" />
+        -->
+        
+        <!-- Inserção do Atributo "Permitida Avaliação Orientada a Eventos" -->
+        <!-- 
+        <booleanAttrType id="event_driven_allowed" defaultValue="true" />
+        -->
+         
+        <!-- Inserção do Atributo "Tempo para Execução em Dias" -->
+        <!--
+        <textAttrType id="running_days" />
+        -->
+        
+        <!-- Fim GAP GRC29 -->
+        
+        <!--  Inicio GAP GRC39 -->
+        <enumAttrType id="categderisco" enumeration="categderisco" defaultValue="1"/>
+        <!--  Fim GAP GRC39 -->
+        
+        <!-- Inicio GAP GRC98 -->
+        <stringAttrType id="ra_result" maxCharCount="50" isMassEditable="false" />
+        <!-- Fim GAP GRC98 -->
+
+
+        <index id="I_6_1" type="normal">
+            <attributeRef attribute="name"/>
+        </index>
+        <index id="I_6_2" type="normal">
+            <attributeRef attribute="impact"/>
+        </index>
+        <!--index id="I_6_3" type="fullText">
+            <attributeRef attribute="description"/>
+        </index-->
+        <index id="I_6_4" type="normal">
+            <attributeRef attribute="probability"/>
+        </index>
+        <index id="I_RISK_ID" type="normal">
+            <attributeRef attribute="risk_id"/>
+        </index>
+    </objectType>
+    
+	<objectType id="CONTROL" xmlexport="true" extends="VERSION"
+                descriptionAttributes="control_id" displayAttribute="name" licensedComponentIds="tm"
+                mashzoneId="50" arisImportRole="controlmanager" image="iconlib/icons/content/control_16.png">
+        <stringAttrType id="control_id" maxCharCount="80" isMassEditable="true">
+            <validate name="maxlength" arg0="80"/>
+        </stringAttrType>
+        <stringAttrType id="name" maxCharCount="250" isMassEditable="true">
+            <validate name="maxlength" arg0="250"/>
+        </stringAttrType>
+        <listAttrType id="manager_group" maxSize="1" objectType.idref="USERGROUP" linkType="13">
+            <listRestriction>
+                <attributeRestriction attribute="role" value="controlmanager"/>
+                <attributeRestriction attribute="rolelevel" value="object"/>
+            </listRestriction>
+        </listAttrType>
+        <enumAttrType id="control_frequency" defaultValue="0" enumeration="custom_controlfreq" isMassEditable="true"/>
+        <enumAttrType id="control_execution" enumeration="custom_controlexecution" isMassEditable="true" defaultValue="1"/>
+        <enumAttrType id="control_effect" enumeration="controleffect" defaultValue="0" isMassEditable="true"/>
+        <enumAttrType id="control_type" enumeration="custom_controltype" isMassEditable="true" defaultValue="6"/>
+        <textAttrType id="controls" isMassEditable="true"/>
+        <listAttrType id="testdefinitions" objectType.idref="TESTDEFINITION" linkType="15"/>
+        <textAttrType id="control_objective" isMassEditable="true"/>
+        <booleanAttrType id="key_control" defaultValue="true"/>
+        <listAttrType id="controlexecutiontasks" objectType.idref="CONTROLEXECUTIONTASK" linkType="6050"/>
+        
+        <!-- Inicio GAP GRC29 : Inclusão de novos atributos de Controle -->
+        <!-- Inclusão de "Relevante para Exportação" -->
+        <booleanAttrType id="control_export_relevant" defaultValue="true"/>
+        <!-- Fim GAP GRC29 -->
+               
+        <index id="I_7_1" type="normal">
+            <attributeRef attribute="name"/>
+        </index>
+        <index id="I_7_2" type="normal">
+            <attributeRef attribute="control_frequency"/>
+        </index>
+        <index id="I_7_3" type="normal">
+            <attributeRef attribute="control_effect"/>
+        </index>
+        <!--index id="I_7_4" type="fullText">
+            <attributeRef attribute="controls"/>
+        </index-->
+        <index id="I_CONTROL_KEY_CONTROL" type="normal">
+            <attributeRef attribute="key_control"/>
+        </index>
+    </objectType>
+    
+	<objectType id="RISKASSESSMENT" xmlexport="true" extends="MONITORABLE" displayAttribute="obj_id"
+                descriptionAttributes="plannedstartdate, plannedenddate, owner_status" licensedComponentIds="rm"
+                dataKind="transactiondata"
+                mashzoneId="230" arisImportRole="riskmanager" image="iconlib/icons/content/risk_assessment_16.png">
+        <booleanAttrType id="newLossesAvailable" defaultValue="false"/>
+        <listAttrType id="process" maxSize="1" objectType.idref="HIERARCHY" linkType="3165" usingFixChildVersion="true">
+            <listRestriction>
+                <attributeRestriction attribute="type" value="process"/>
+            </listRestriction>
+        </listAttrType>
+        <listAttrType id="risk" maxSize="1" objectType.idref="RISK" linkType="3166" usingFixChildVersion="true"/>
+        <listAttrType id="reviewer_group" maxSize="1" objectType.idref="USERGROUP" linkType="3167">
+            <listRestriction>
+                <attributeRestriction attribute="role" value="riskreviewer"/>
+                <attributeRestriction attribute="rolelevel" value="object"/>
+            </listRestriction>
+        </listAttrType>
+        <listAttrType id="owner_group" maxSize="1" objectType.idref="USERGROUP" linkType="3168">
+            <listRestriction>
+                <attributeRestriction attribute="role" value="riskowner"/>
+                <attributeRestriction attribute="rolelevel" value="object"/>
+            </listRestriction>
+        </listAttrType>
+        <listAttrType id="owner" maxSize="1" objectType.idref="USER" linkType="3169"/>
+        <listAttrType id="owner_substitute" maxSize="1" objectType.idref="USER" linkType="3175"/>
+        <listAttrType id="reviewer" maxSize="1" objectType.idref="USER" linkType="4024"/>
+        <listAttrType id="reviewer_substitute" maxSize="1" objectType.idref="USER" linkType="4025"/>
+        <listAttrType id="risk_category" objectType.idref="HIERARCHY" linkType="3170" usingFixChildVersion="true">
+            <listRestriction>
+                <attributeRestriction attribute="type" value="category"/>
+            </listRestriction>
+        </listAttrType>
+        <listAttrType id="orgunit" objectType.idref="HIERARCHY" linkType="3171" usingFixChildVersion="true">
+            <listRestriction>
+                <attributeRestriction attribute="type" value="orgunit"/>
+            </listRestriction>
+        </listAttrType>
+        <listAttrType id="appsystem" objectType.idref="HIERARCHY" linkType="3172" usingFixChildVersion="true">
+            <listRestriction>
+                <attributeRestriction attribute="type" value="applicationsystemtype"/>
+            </listRestriction>
+        </listAttrType>
+        <listAttrType id="finaccount" objectType.idref="HIERARCHY" linkType="3173" usingFixChildVersion="true">
+            <listRestriction>
+                <attributeRestriction attribute="type" value="financialaccount"/>
+            </listRestriction>
+        </listAttrType>
+        <textAttrType id="assessment_activities"/>
+        <enumAttrType id="basis_of_valuation" enumeration="basis_of_valuation" defaultValue="0"/>
+        <enumAttrType id="data_source" enumeration="data_source" defaultValue="0"/>
+        <enumAttrType id="currency" enumeration="currency" defaultValue="0"/>
+        <enumAttrType id="owner_status" enumeration="assessment_state" defaultValue="1"/>
+        <enumAttrType id="reviewer_status" enumeration="review_state" defaultValue="0"/>
+        <listAttrType id="documents" objectType.idref="DOCUMENT" linkType="3174"/>
+        <textAttrType id="remark"/>
+        <listAttrType id="impacttypes" linkType="5822" objectType.idref="RA_IMPACTTYPE" />
+        
+        <!-- Inicio GAP GRC29 -->
+        <stringAttrType id="result_assessment" maxCharCount="30" isMassEditable="false" defaultValue="TESTE"/>
+        <doubleAttrType id="height" />
+        <stringAttrType id="progress" maxCharCount="100" isMassEditable="false"/>
+        <!-- Fim GAP GRC29 -->
+        
+    </objectType>
+    
+	<objectType id="RA_IMPACTTYPE" extends="VERSION" xmlexport="true" displayAttribute="obj_id"
+                clientDependent="true" licensedComponentIds="rm" image="iconlib/icons/impact_type_16.png">
+        <enumAttrType id="owner_status" enumeration="assessment_state" defaultValue="1"/>
+        <!-- set by the rules to indicate if qualitative and/or quantitative values are set completely -->
+        <booleanAttrType id="isFilled" defaultValue="false"/>
+        <!-- set by copy loss value feature to identify the losses which are used to pre-fill the quantitative values a-->
+        <textAttrType id="usedLosses" />
+        <listAttrType id="impacttype" linkType="5810" objectType.idref="IMPACTTYPE" maxSize="1" >
+            <listRestriction>
+                <attributeRestriction attribute="isSnapshot" value="true"/>
+            </listRestriction>
+        </listAttrType>
+
+        <enumAttrType id="type" enumeration="assessment_type" defaultValue="0"/>
+
+        <enumAttrType id="currency" enumeration="currency" defaultValue="0"/>
+        <doubleAttrType id="avg_loss">
+            <validate name="double" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="double" arg0="leq:999999999999999:value.must.not.be.greater.than.bound.ERR"/>
+            <validate name="double" arg0="scale:2:value.must.have.at.most.decimal.places.ERR"/>
+        </doubleAttrType>
+        <doubleAttrType id="max_loss">
+            <validate name="double" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="double" arg0="leq:999999999999999:value.must.not.be.greater.than.bound.ERR"/>
+            <validate name="double" arg0="scale:2:value.must.have.at.most.decimal.places.ERR"/>
+        </doubleAttrType>
+        <doubleAttrType id="min_loss">
+            <validate name="double" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="double" arg0="leq:999999999999999:value.must.not.be.greater.than.bound.ERR"/>
+            <validate name="double" arg0="scale:2:value.must.have.at.most.decimal.places.ERR"/>
+        </doubleAttrType>
+        <doubleAttrType id="frequ_avg_loss" precision="4:4">
+            <validate name="double" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="double" arg0="leq:999999999999999:value.must.not.be.greater.than.bound.ERR"/>
+            <validate name="double" arg0="scale:4:value.must.have.at.most.decimal.places.ERR"/>
+        </doubleAttrType>
+        <doubleAttrType id="frequ_max_loss" precision="4:4">
+            <validate name="double" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="double" arg0="leq:999999999999999:value.must.not.be.greater.than.bound.ERR"/>
+            <validate name="double" arg0="scale:4:value.must.have.at.most.decimal.places.ERR"/>
+        </doubleAttrType>
+        <doubleAttrType id="frequ_min_loss" precision="4:4">
+            <validate name="double" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="double" arg0="leq:999999999999999:value.must.not.be.greater.than.bound.ERR"/>
+            <validate name="double" arg0="scale:4:value.must.have.at.most.decimal.places.ERR"/>
+        </doubleAttrType>
+        <doubleAttrType id="red_avg_loss">
+            <validate name="double" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="double" arg0="leq:999999999999999:value.must.not.be.greater.than.bound.ERR"/>
+            <validate name="double" arg0="scale:2:value.must.have.at.most.decimal.places.ERR"/>
+        </doubleAttrType>
+        <doubleAttrType id="red_max_loss">
+            <validate name="double" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="double" arg0="leq:999999999999999:value.must.not.be.greater.than.bound.ERR"/>
+            <validate name="double" arg0="scale:2:value.must.have.at.most.decimal.places.ERR"/>
+        </doubleAttrType>
+        <doubleAttrType id="red_min_loss">
+            <validate name="double" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="double" arg0="leq:999999999999999:value.must.not.be.greater.than.bound.ERR"/>
+            <validate name="double" arg0="scale:2:value.must.have.at.most.decimal.places.ERR"/>
+        </doubleAttrType>
+        <doubleAttrType id="red_frequ_avg_loss" precision="4:4">
+            <validate name="double" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="double" arg0="leq:999999999999999:value.must.not.be.greater.than.bound.ERR"/>
+            <validate name="double" arg0="scale:4:value.must.have.at.most.decimal.places.ERR"/>
+        </doubleAttrType>
+        <doubleAttrType id="red_frequ_max_loss" precision="4:4">
+            <validate name="double" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="double" arg0="leq:999999999999999:value.must.not.be.greater.than.bound.ERR"/>
+            <validate name="double" arg0="scale:4:value.must.have.at.most.decimal.places.ERR"/>
+        </doubleAttrType>
+        <doubleAttrType id="red_frequ_min_loss" precision="4:4">
+            <validate name="double" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="double" arg0="leq:999999999999999:value.must.not.be.greater.than.bound.ERR"/>
+            <validate name="double" arg0="scale:4:value.must.have.at.most.decimal.places.ERR"/>
+        </doubleAttrType>
+        <doubleAttrType id="exp_avg_loss">
+            <validate name="double" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="double" arg0="leq:999999999999999:value.must.not.be.greater.than.bound.ERR"/>
+            <validate name="double" arg0="scale:2:value.must.have.at.most.decimal.places.ERR"/>
+        </doubleAttrType>
+        <doubleAttrType id="exp_max_loss">
+            <validate name="double" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="double" arg0="leq:999999999999999:value.must.not.be.greater.than.bound.ERR"/>
+            <validate name="double" arg0="scale:2:value.must.have.at.most.decimal.places.ERR"/>
+        </doubleAttrType>
+        <doubleAttrType id="exp_min_loss">
+            <validate name="double" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="double" arg0="leq:999999999999999:value.must.not.be.greater.than.bound.ERR"/>
+            <validate name="double" arg0="scale:2:value.must.have.at.most.decimal.places.ERR"/>
+        </doubleAttrType>
+        <doubleAttrType id="red_exp_avg_loss">
+            <validate name="double" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="double" arg0="leq:999999999999999:value.must.not.be.greater.than.bound.ERR"/>
+            <validate name="double" arg0="scale:2:value.must.have.at.most.decimal.places.ERR"/>
+        </doubleAttrType>
+        <doubleAttrType id="red_exp_max_loss">
+            <validate name="double" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="double" arg0="leq:999999999999999:value.must.not.be.greater.than.bound.ERR"/>
+            <validate name="double" arg0="scale:2:value.must.have.at.most.decimal.places.ERR"/>
+        </doubleAttrType>
+        <doubleAttrType id="red_exp_min_loss">
+            <validate name="double" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="double" arg0="leq:999999999999999:value.must.not.be.greater.than.bound.ERR"/>
+            <validate name="double" arg0="scale:2:value.must.have.at.most.decimal.places.ERR"/>
+        </doubleAttrType>
+        <doubleAttrType id="th_impact_score">
+            <validate name="double" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="double" arg0="leq:999999999999999:value.must.not.be.greater.than.bound.ERR"/>
+            <validate name="double" arg0="scale:2:value.must.have.at.most.decimal.places.ERR"/>
+        </doubleAttrType>
+        <doubleAttrType id="th_red_impact_score">
+            <validate name="double" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="double" arg0="leq:999999999999999:value.must.not.be.greater.than.bound.ERR"/>
+            <validate name="double" arg0="scale:2:value.must.have.at.most.decimal.places.ERR"/>
+        </doubleAttrType>
+
+        <listAttrType id="lossQual" linkType="5811" objectType.idref="QUOTATION" maxSize="1" >
+            <listRestriction>
+                <attributeRestriction attribute="isSnapshot" value="true"/>
+            </listRestriction>
+        </listAttrType>
+        <listAttrType id="frequLossQual" linkType="5812" objectType.idref="FREQUENCY" maxSize="1" >
+            <listRestriction>
+                <attributeRestriction attribute="isSnapshot" value="true"/>
+            </listRestriction>
+        </listAttrType>
+
+        <listAttrType id="redLossQual" linkType="5813" objectType.idref="QUOTATION" maxSize="1" >
+            <listRestriction>
+                <attributeRestriction attribute="isSnapshot" value="true"/>
+            </listRestriction>
+        </listAttrType>
+        <listAttrType id="redFrequLossQual" linkType="5814" objectType.idref="FREQUENCY" maxSize="1" >
+            <listRestriction>
+                <attributeRestriction attribute="isSnapshot" value="true"/>
+            </listRestriction>
+        </listAttrType>
+        
+        <!-- Inicio GAP GRC29 -->
+        <stringAttrType id="result_assessment" maxCharCount="30" isMassEditable="false" defaultValue="TESTE"/>
+        <!-- Fim GAP GRC29 -->
+        
+    </objectType>
+    
+    <objectType id="QUOTATION" extends="VERSION" xmlexport="true" displayAttribute="name" descriptionAttributes="description"
+                clientDependent="true" licensedComponentIds="rm" image="iconlib/icons/quotation_16.png">
+        <stringAttrType id="name" maxCharCount="200" />
+        <stringAttrType id="description" maxCharCount="200"/>
+        <doubleAttrType id="value" />
+        
+        <!-- Inicio GAP GRC29 -->
+		<doubleAttrType id="height" />
+		<!-- Fim GAP GRC29 -->
+		
+        <booleanAttrType id="isDefault" defaultValue="false"/>
+        <booleanAttrType id="isSnapshot" defaultValue="false"/>
+        <longAttrType id="relatedObjectId" objectType.idref="IMPACTTYPE"/>
+        <longAttrType id="originalQuotation" objectType.idref="QUOTATION"/>
+
+        <index id="I_QUOTATION_S" type="normal">
+            <attributeRef attribute="isSnapshot"/>
+        </index>
+        <index id="I_QUOTATION_D" type="normal">
+            <attributeRef attribute="isDefault"/>
+        </index>
+        <index id="I_QUOTATION_R" type="normal">
+            <attributeRef attribute="relatedObjectId"/>
+        </index>
+    </objectType>
+    
+    
+	<objectType id="ISSUE" extends="MONITORABLE" xmlexport="false" clientDependent="false" displayAttribute="name"
+                licensedComponentIds="im" dataKind="transactiondata"
+                mashzoneId="220" image="iconlib/icons/content/issue_16.png">
+
+        <listAttrType id="creator" maxSize="1" objectType.idref="USER" linkType="3103"/>
+        <enumAttrType id="creator_status" enumeration="issue_creator_status" defaultValue="1"/>
+
+        <listAttrType id="owners" objectType.idref="USER" linkType="3100" />
+        <listAttrType id="owner_group" objectType.idref="USERGROUP" linkType="4019" maxSize="0"/>
+        <enumAttrType id="owner_status" enumeration="issue_owner_status" defaultValue="1"/>
+        <listAttrType id="owner" maxSize="1" objectType.idref="USER" linkType="3105"/>
+        <listAttrType id="owner_substitute" maxSize="1" objectType.idref="USER" linkType="3106"/>
+
+        <listAttrType id="reviewers" objectType.idref="USER" linkType="3101" />
+        <listAttrType id="reviewer_group" objectType.idref="USERGROUP" linkType="4021" maxSize="0"/>
+        <listAttrType id="reviewer" objectType.idref="USER" linkType="4022" maxSize="1"/>
+        <listAttrType id="reviewer_substitute" objectType.idref="USER" linkType="4023"/>
+        <enumAttrType id="reviewer_status" enumeration="issue_reviewer_status" defaultValue="1"/>
+
+        <!-- for IRO rendering -->
+        <longAttrType id="relatedTestcaseID"  objectType.idref="TESTCASE"/>
+        <longAttrType id="relatedAudiStepID"  objectType.idref="AUDITSTEP"/>
+        <!-- for issue list filter and mashzone view -->
+        <booleanAttrType id="created_by_testcase" defaultValue="false"/>
+        <booleanAttrType id="created_by_auditstep" defaultValue="false"/>
+
+        <textAttrType id="description"/>
+        <textAttrType id="remark"/>
+        <textAttrType id="immediateMeasure"/>
+        <textAttrType id="remediationMeasure" isMassEditable="true"/>
+        <textAttrType id="owner_remark"/>
+        <textAttrType id="reviewer_remark"/>
+        <listAttrType id="issueRelevantObjects"
+                  objectType.idref="CLIENT,USERGROUP,USER,RISK,CONTROL,TESTDEFINITION,TESTCASE,DOCUMENT,RECOMMENDATION,DEFICIENCY,QUESTIONNAIRE_TEMPLATE,SECTION,QUESTION,OPTIONSET,OPTION,NEWSMESSAGE,SURVEYTASK,SURVEY,QUESTIONNAIRE,ANSWER,HIERARCHY,SOTASK,SOPROCESS,ISSUE,SITE,RISKASSESSMENT,INCIDENT,LOSS,AUDITTEMPLATE,AUDITSTEPTEMPLATE,AUDIT,AUDITSTEP,POLICYDEFINITION,POLICY,POLICYAPPROVAL,POLICYCONFIRMATION,EXCEPTION,POLICYREVIEW,CHANGEREVIEW,IMPACTTYPE,QUOTATION,FREQUENCY,CONTROLEXECUTIONTASK,CONTROLEXECUTION"
+                  linkType="3102" orderType="auto" usingFixChildVersion="true"/>
+        <enumAttrType id="category" enumeration="issue_category" defaultValue="0"/>
+        <enumAttrType id="stateTime" enumeration="issueStateTime" defaultValue="1"/>
+        <enumAttrType id="priority" enumeration="issuePriority" defaultValue="2"/>
+        <listAttrType id="documents" objectType.idref="DOCUMENT" linkType="3104"/>
+        
+        <!-- Teste -->
+        <listAttrType id="appsystem" objectType.idref="HIERARCHY" linkType="99000">
+            <listRestriction>
+                <attributeRestriction attribute="type" value="applicationsystemtype"/>
+            </listRestriction>
+        </listAttrType>
+        <!-- 
+        <listAttrType id="customsys" objectType.idref="HIERARCHY" linkType="99000" orderType="hierarchy">
+            <listRestriction>
+                <attributeRestriction attribute="type" value="applicationsystemtype"/>
+            </listRestriction>
+        </listAttrType>
+        -->
+        <!-- Fim Teste -->        
+
+        <index id="I_ISSUE_1" type="normal">
+            <attributeRef attribute="name"/>
+        </index>
+        <index id="I_ISSUE_2" type="normal">
+            <attributeRef attribute="category"/>
+        </index>
+        <index id="I_ISSUE_5" type="normal">
+            <attributeRef attribute="stateTime"/>
+        </index>
+        <index id="I_ISSUE_7" type="normal">
+            <attributeRef attribute="priority"/>
+        </index>
+    </objectType> 
+    
+	<objectType id="TESTDEFINITION" xmlexport="true" extends="RECURRING" displayAttribute="name" licensedComponentIds="tm"
+                descriptionAttributes="frequency, duration, startdate"
+                mashzoneId="60" arisImportRole="testmanager" image="iconlib/icons/content/test_definition_16.png">
+        <textAttrType id="testingsteps" isMassEditable="true"/>
+        <enumAttrType id="test_nature" enumeration="natureoftest" isMassEditable="true"/>
+        <textAttrType id="testextend" isMassEditable="true"/>
+        <enumAttrType id="frequency" enumeration="frequency_including_none" defaultValue="0"/>
+        <listAttrType id="owner_group" maxSize="1" objectType.idref="USERGROUP" linkType="3">
+            <listRestriction>
+                <attributeRestriction attribute="role" value="tester"/>
+                <attributeRestriction attribute="rolelevel" value="object"/>
+            </listRestriction>
+        </listAttrType>
+        <listAttrType id="reviewer_group" maxSize="1" objectType.idref="USERGROUP" linkType="53">
+            <listRestriction>
+                <attributeRestriction attribute="role" value="testreviewer"/>
+                <attributeRestriction attribute="rolelevel" value="object"/>
+            </listRestriction>
+        </listAttrType>
+        <listAttrType id="manager_group" maxSize="1" objectType.idref="USERGROUP" linkType="5815">
+            <listRestriction>
+                <attributeRestriction attribute="role" value="testmanager"/>
+                <attributeRestriction attribute="rolelevel" value="object"/>
+            </listRestriction>
+        </listAttrType>
+        <listAttrType id="orgunit" maxSize="1" objectType.idref="HIERARCHY" linkType="49">
+            <listRestriction>
+                <attributeRestriction attribute="type" value="orgunit"/>
+            </listRestriction>
+        </listAttrType>
+        <stringAttrType id="walkthroughName" maxCharCount="50" isMassEditable="true">
+            <validate name="maxlength" arg0="50"/>
+        </stringAttrType>
+        <stringAttrType id="walkthroughCounter" maxCharCount="50" isMassEditable="true">
+            <validate name="maxlength" arg0="50"/>
+        </stringAttrType>
+        <booleanAttrType id="isfollowup" isMassEditable="true"/>
+        <enumAttrType id="testtype" enumeration="testtype" isMassEditable="true"/>
+        
+        <!-- GAP-GRC52 Inicio--> 
+        <enumAttrType id="origemteste" enumeration="origemteste" isMassEditable="true" defaultValue="1"/>
+        <!-- GAP-GRC52 Fim--> 
+        
+        <index id="I_TESTDEFINITION_4" type="normal">
+            <attributeRef attribute="walkthroughName"/>
+        </index>
+        <index id="I_TESTDEFINITION_5" type="normal">
+            <attributeRef attribute="walkthroughCounter"/>
+        </index>
+        <index id="I_TESTDEFINITION_6" type="fullText">
+            <attributeRef attribute="isfollowup"/>
+        </index>
+        <index id="I_TESTDEFINITION_NAME" type="normal">
+            <attributeRef attribute="name"/>
+        </index>
+    </objectType>
+    
+    <objectType id="CONTROLEXECUTION" xmlexport="true" extends="MONITORABLE" displayAttribute="obj_id" licensedComponentIds="tm"
+                dataKind="transactiondata" image="iconlib/icons/doctype/control_execution_16.png" mashzoneId="310">
+        <listAttrType id="controlexecutiontask" maxSize="1" objectType.idref="CONTROLEXECUTIONTASK" linkType="6055" usingFixChildVersion="true"/>
+        <listAttrType id="owner_group" maxSize="1" objectType.idref="USERGROUP" linkType="6056">
+            <listRestriction>
+                <attributeRestriction attribute="role" value="controlexecutionowner"/>
+                <attributeRestriction attribute="rolelevel" value="object"/>
+            </listRestriction>
+        </listAttrType>
+        <listAttrType id="owner" maxSize="1" objectType.idref="USER" linkType="6057" />
+        <listAttrType id="owner_substitute" maxSize="1" objectType.idref="USER" linkType="6058"/>
+        <!-- represents the documentation state -->
+        <enumAttrType id="owner_status" enumeration="controlexecution_owner_status" defaultValue="1"/>
+        <!-- reviewer is not used at the moment, but has to be define due to the inheritance of the MONITORABLE-object -->
+        <listAttrType id="reviewer_group" maxSize="0" objectType.idref="USERGROUP" linkType="6059"/>
+        <listAttrType id="reviewer" maxSize="1" objectType.idref="USER" linkType="6060" />
+        <listAttrType id="reviewer_substitute" maxSize="0" objectType.idref="USER" linkType="6061"/>
+        <enumAttrType id="reviewer_status" enumeration="controlexecution_reviewer_status" defaultValue="-1"/>
+
+        <!-- atttributes from control execution task object -->
+        <listAttrType id="affected_orgunit" maxSize="1" objectType.idref="HIERARCHY" linkType="6062" usingFixChildVersion="true">
+            <listRestriction>
+                <attributeRestriction attribute="type" value="orgunit"/>
+            </listRestriction>
+        </listAttrType>
+        <textAttrType id="activities"/>
+        <textAttrType id="selectivity"/>
+        <textAttrType id="result_format"/>
+        <listAttrType id="documents" objectType.idref="DOCUMENT" linkType="6063"/>
+        <listAttrType id="control" objectType.idref="CONTROL" linkType="6064" usingFixChildVersion="true"/>
+
+        <!-- additional hierarchy connections relevant for evaluations -->
+        <listAttrType id="process" maxSize="1" objectType.idref="HIERARCHY" linkType="6066" usingFixChildVersion="true">
+            <listRestriction>
+                <attributeRestriction attribute="type" value="process"/>
+            </listRestriction>
+        </listAttrType>
+        <listAttrType id="finaccount" objectType.idref="HIERARCHY" linkType="6067" usingFixChildVersion="true">
+            <listRestriction>
+                <attributeRestriction attribute="type" value="financialaccount"/>
+            </listRestriction>
+        </listAttrType>
+        <listAttrType id="risk_category" objectType.idref="HIERARCHY" linkType="6068" usingFixChildVersion="true">
+            <listRestriction>
+                <attributeRestriction attribute="type" value="category"/>
+            </listRestriction>
+        </listAttrType>
+        <listAttrType id="appsystem" objectType.idref="HIERARCHY" linkType="6069" usingFixChildVersion="true">
+            <listRestriction>
+                <attributeRestriction attribute="type" value="applicationsystemtype"/>
+            </listRestriction>
+        </listAttrType>
+
+        <!-- own additional attributes -->
+        <longAttrType id="items_to_control">
+            <validate name="long" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="long" arg0="scale:0:errors.long"/>
+        </longAttrType>
+        <longAttrType id="items_actual_controlled">
+            <validate name="long" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="long" arg0="scale:0:errors.long"/>
+        </longAttrType>
+        <textAttrType id="selected_sample_data"/>
+        <longAttrType id="sum_items_ok">
+            <validate name="long" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="long" arg0="scale:0:errors.long"/>
+        </longAttrType>
+        <longAttrType id="sum_items_not_ok">
+            <validate name="long" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="long" arg0="scale:0:errors.long"/>
+        </longAttrType>
+        <textAttrType id="anomalies_description"/>
+        <doubleAttrType id="anomaly_rate"/>
+        <doubleAttrType id="completion_rate"/>
+        <enumAttrType id="due_status" defaultValue="1" enumeration="due_status" />
+        <textAttrType id="remark"/>
+        <listAttrType id="execution_documents" objectType.idref="DOCUMENT" linkType="6065"/>
+        
+        <!-- Inicio GAP GRC98 -->
+        <enumAttrType id="custom_controlexecstatus" defaultValue="1" enumeration="custom_controlexecstatus" />
+        <!-- Fim GAP GRC98 -->
+    </objectType>
+        
+</custom>

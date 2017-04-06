@@ -1,0 +1,1124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../xsd/custom.xsd">
+
+    <form id="FORM_RISK">
+        <logToolbarButtons>
+            <buttonReference button.idref="ARIS_REPORT"/>
+        </logToolbarButtons>
+        <formButtons>
+            <!-- <buttonReference button.idref="OBJECT_SAVE"/> -->
+            <buttonReference button.idref="CUSTOM_RISK_SAVE"/>
+            <buttonReference button.idref="OBJECT_SAVE_AND_NEXT"/>
+            <buttonReference button.idref="OBJECT_DELETE"/>
+            <buttonReference button.idref="OBJECT_REACTIVATE"/>
+            <buttonReference button.idref="OBJECT_RISKASSESSMENT_CREATE"/>
+            <buttonReference button.idref="GOTO_CONNECT"/>
+            <buttonReference button.idref="PDF_REPORT"/>
+        </formButtons>
+        <page id="risk" licensedComponentIds="tm,rm,il,in">
+            <rowGroup id="risk.1">
+            	
+            	<!-- Inicio GAP GRC29: Inclusão do Atributo "Exportação Relevante" -->
+            	<!--  
+            	<row id="export_relevant">
+            		<element attribute.idref="export_relevant"/>
+            	</row>
+            	-->
+            	<!-- Fim GAP GRC29 -->
+                
+                <row id="client_sign">
+                    <element attribute.idref="client_sign" template="clientSign"/>
+                </row>
+                <row id="risk_id">
+                    <element attribute.idref="risk_id"/>
+                </row>
+                <row id="name">
+                    <element attribute.idref="name"/>
+                </row>
+                <row id="description">
+                    <element attribute.idref="description"/>
+                </row>
+                
+                <!-- Inicio GAP GRC29: Inclusão do Atributo "Causa" -->
+                <row id="cause">
+                	<element attribute.idref="cause"/>
+                </row>                
+                <!-- Fim GAP GRC29 -->
+                
+                <!-- Inicio GAP GRC29: Inclusão do Atributo "Consequencia" -->
+                <row id="consequence">
+                	<element attribute.idref="consequence"/>
+                </row>                
+                <!-- Fim GAP GRC29 -->                
+                
+                <row id="process">
+                    <element attribute.idref="process">
+                        <parameter name="selectionList" value="AUTO"/>
+                        <button.add button.idref="OBJECTLINK" location="row"/>
+                        <button.add button.idref="MODELLINK" location="row"/>
+                        <button.add button.idref="CONNECTLINK" location="row"/>
+                    </element>
+                </row>
+                <row id="impact">
+                    <element attribute.idref="impact"/>
+                </row>
+                <row id="probability">
+                    <element attribute.idref="probability"/>
+                </row>
+                <row id="finaccount">
+                    <element attribute.idref="finaccount">
+                        <parameter name="selectionList" value="AUTO"/>
+                    </element>
+                </row>
+                <row id="risktype">
+                    <element attribute.idref="risktype">
+                        <javaScriptEvent expression="aam_objectcommand('cache')" name="onClick"/>
+                    </element>
+                </row>
+                <!--  Inicio GAP GRC39 -->
+				<row id="categderisco">
+                    <element attribute.idref="categderisco"/>
+                </row>                
+                <!--  Fim GAP GRC39 -->
+                <row id="manager_group">
+                    <element attribute.idref="manager_group">
+                        <parameter name="selectionList" value="AUTO"/>
+                        <button.add button.idref="RELATION_CREATE" location="toolbar" type="writable"/>
+                    </element>
+                </row>
+                <!-- GRC29 : Exclusão de atributos desnecessários
+                <row id="assertions">
+                    <element attribute.idref="assertions"/>
+                </row>
+                -->
+                <row id="documents">
+                    <element attribute.idref="documents" template="doclink">
+                        <parameter name="selectionList" value="AUTO"/>
+                    </element>
+                </row>
+                <!-- GRC29 : Exclusão de atributos desnecessários
+                <row id="risk_catalog1">
+                    <element attribute.idref="risk_catalog1"/>
+                </row>
+                <row id="risk_catalog2">
+                    <element attribute.idref="risk_catalog2"/>
+                </row>
+                -->
+                
+                <!-- Inicio GAP GRC29 -->
+                
+                <!-- Inclusão do Atributo "Causa" -->
+                <!--  
+                <row id="cause">
+                	<element attribute.idref="cause"/>
+                </row>
+                -->
+                
+                <!-- Inclusão do Atributo "Consequencia" -->
+                <!-- 
+                <row id="consequence">
+                	<element attribute.idref="consequence"/>
+                </row>
+                 -->               
+                
+                <!-- Fim GAP GRC29 -->
+                
+            </rowGroup>
+        </page>
+        <page id="riskassessment" licensedComponentIds="rm,il,in">
+            <rowGroup id="riskassessment.1">
+                <row id="assessment_activities">
+                    <element attribute.idref="assessment_activities"/>
+                </row>                
+                <!-- GRC29 : Exclusão de atributos desnecessários -->
+                <!--        
+                <row id="risk_management_relevant">
+                    <element attribute.idref="risk_management_relevant">
+                        <javaScriptEvent expression="aam_objectcommand('cache');" name="onClick"/>
+                    </element>
+                </row>                
+                <row id="frequency">
+                    <element attribute.idref="frequency"/>
+                        <javaScriptEvent expression="aam_objectcommand('cache');" name="onChange"/>
+                    </element>
+                </row>
+                <row id="event_driven_allowed">
+                    <element attribute.idref="event_driven_allowed"/>
+                </row>
+                <row id="duration">
+                    <element attribute.idref="duration"/>
+                </row>
+                <row id="startdate">
+                    <element attribute.idref="startdate">
+                    	<javaScriptEvent expression="aam_objectcommand('customcache');" name="onLoad"/>
+                    </element>
+                </row>
+                <row id="enddate">
+                    <element attribute.idref="enddate"/>
+                </row>
+                -->
+                <!-- Fim GAP GRC29 -->
+                <row id="owner_group">
+                    <element attribute.idref="owner_group">
+                        <parameter name="selectionList" value="AUTO"/>
+                        <button.add button.idref="RELATION_CREATE" location="toolbar" type="writable"/>
+                    </element>
+                </row>
+                <row id="reviewer_group">
+                    <element attribute.idref="reviewer_group">
+                        <parameter name="selectionList" value="AUTO"/>
+                        <button.add button.idref="RELATION_CREATE" location="toolbar" type="writable"/>
+                    </element>
+                </row>
+                <row id="risk_category">
+                    <element attribute.idref="risk_category">
+                        <parameter name="selectionList" value="AUTO"/>
+                    </element>
+                </row>
+                <row id="organizational_unit">
+                    <element attribute.idref="orgunit">
+                        <parameter name="selectionList" value="AUTO"/>
+                    </element>
+                </row>
+                <row id="application_system_type">
+                    <element attribute.idref="appsystem">
+                        <parameter name="selectionList" value="AUTO"/>
+                    </element>
+                </row>
+            </rowGroup>
+            
+            <!-- GRC29 : Exclusão de atributos desnecessários -->
+            <!-- 
+            <rowGroup id="riskassessment.2">
+                <row id="rm_notifications_qualitative">
+                    <element attribute.idref="rm_notifications_qualitative" >
+                        <javaScriptEvent expression="aam_objectcommand('cache');" name="onChange"/>
+                    </element>
+                </row>
+                <row id="th_impact_score">
+                    <element attribute.idref="th_impact_score">
+                        <parameter name="maxLength" value="20"/>
+                        <parameter name="size" value="20"/>
+                    </element>
+                </row>
+                <row id="th_red_impact_score">
+                    <element attribute.idref="th_red_impact_score">
+                        <parameter name="maxLength" value="20"/>
+                        <parameter name="size" value="20"/>
+                    </element>
+                </row>
+                <row id="rm_notifications_quantitative">
+                    <element attribute.idref="rm_notifications_quantitative" >
+                        <javaScriptEvent expression="aam_objectcommand('cache');" name="onChange"/>
+                    </element>
+                </row>
+
+                <row id="currency">
+                    <element attribute.idref="currency">
+                        <javaScriptEvent expression="aam_objectcommand('cache')" name="onChange"/>
+                    </element>
+                </row>
+                <row id="th_exp_min_loss">
+                    <element attribute.idref="th_exp_min_loss" template="stringEnum">
+                        <parameter name="enumProperty" value="currency"/>
+                        <parameter name="maxLength" value="20"/>
+                        <parameter name="size" value="20"/>
+                    </element>
+                </row>
+                <row id="th_exp_avg_loss">
+                    <element attribute.idref="th_exp_avg_loss" template="stringEnum">
+                        <parameter name="enumProperty" value="currency"/>
+                        <parameter name="maxLength" value="20"/>
+                        <parameter name="size" value="20"/>
+                    </element>
+                </row>
+                <row id="th_exp_max_loss">
+                    <element attribute.idref="th_exp_max_loss" template="stringEnum">
+                        <parameter name="enumProperty" value="currency"/>
+                        <parameter name="maxLength" value="20"/>
+                        <parameter name="size" value="20"/>
+                    </element>
+                </row>
+                <row id="th_red_exp_min_loss">
+                    <element attribute.idref="th_red_exp_min_loss" template="stringEnum">
+                        <parameter name="enumProperty" value="currency"/>
+                        <parameter name="maxLength" value="20"/>
+                        <parameter name="size" value="20"/>
+                    </element>
+                </row>
+                <row id="th_red_exp_avg_loss">
+                    <element attribute.idref="th_red_exp_avg_loss" template="stringEnum">
+                        <parameter name="enumProperty" value="currency"/>
+                        <parameter name="maxLength" value="20"/>
+                        <parameter name="size" value="20"/>
+                    </element>
+                </row>
+                <row id="th_red_exp_max_loss">
+                    <element attribute.idref="th_red_exp_max_loss" template="stringEnum">
+                        <parameter name="enumProperty" value="currency"/>
+                        <parameter name="maxLength" value="20"/>
+                        <parameter name="size" value="20"/>
+                    </element>
+                </row>
+                <row id="notification_to">
+                    <element attribute.idref="notification_to"/>
+                </row>
+            </rowGroup>
+            -->
+            <!-- Fim GAP GRC29 -->
+            
+        </page>
+        <!-- Inicio GAP GRC98 -->
+        <page id="residualrisk" licensedComponentIds="tm,rm,il,in">
+        	<javaScriptRef scriptName="customrisk"/>
+        	<rowGroup id="residualrisk.1">
+				<row id="residualrisk_id">
+                    <element attribute.idref="risk_id"/>
+                </row>
+                <row id="residualrisk_name"> 
+                    <element attribute.idref="name"/>
+                </row>
+                <row id="residualra_result"> 
+                    <element attribute.idref="ra_result"/>
+                </row>
+        	</rowGroup>
+        </page>
+        <!-- Fim GAP GRC98 -->
+        
+    </form>
+    
+    
+	<form id="FORM_CONTROL">
+        <logToolbarButtons>
+            <buttonReference button.idref="ARIS_REPORT"/>
+        </logToolbarButtons>
+        <formButtons>
+            <buttonReference button.idref="OBJECT_SAVE"/>
+            <buttonReference button.idref="OBJECT_SAVE_AND_NEXT"/>
+            <buttonReference button.idref="OBJECT_DELETE"/>
+            <buttonReference button.idref="OBJECT_REACTIVATE"/>
+            <buttonReference button.idref="PDF_REPORT"/>
+        </formButtons>
+        <page id="control" licensedComponentIds="tm">
+            <rowGroup id="control.1">
+                <row id="client_sign">
+                    <element attribute.idref="client_sign" template="clientSign"/>
+                </row>
+                
+                <!-- GAP29 -->
+                <row id="control_export_relevant">
+                	<element attribute.idref="control_export_relevant"/>
+                </row>
+                
+                <row id="control_id">
+                    <element attribute.idref="control_id"/>
+                </row>
+                <row id="name">
+                    <element attribute.idref="name"/>
+                </row>
+                <row id="control_objective">
+                    <element attribute.idref="control_objective"/>
+                </row>
+                <row id="key_control">
+                    <element attribute.idref="key_control"/>
+                </row>
+                <row id="control_type" propertyKey="forms.row.form_control.control_type.DBI">
+                    <element attribute.idref="control_type"/>
+                </row>
+                <row id="control_owner_group">
+                    <element attribute.idref="manager_group">
+                        <parameter name="selectionList" value="AUTO"/>
+                        <button.add button.idref="RELATION_CREATE" location="toolbar" type="writable"/>
+                    </element>
+                </row>
+                <row id="controls">
+                    <element attribute.idref="controls"/>
+                </row>
+                <row id="control_frequency">
+                    <element attribute.idref="control_frequency"/>
+                </row>
+                <row id="control_execution" propertyKey="forms.row.form_control.control_execution.DBI">
+                    <element attribute.idref="control_execution"/>
+                </row>
+                <row id="control_effect">
+                    <element attribute.idref="control_effect"/>
+                </row>
+            </rowGroup>
+        </page>
+    </form>
+    
+	<form id="FORM_RISKASSESSMENT" controlName="riskassessmentform">
+        <logToolbarButtons>
+            <buttonReference button.idref="ARIS_REPORT"/>
+        </logToolbarButtons>
+        <formButtons>
+        	<!-- Inicio GAP GRC14 -->
+            <!-- <buttonReference button.idref="OBJECT_SAVE"/> -->
+            <buttonReference button.idref="CUSTOM_RA_SAVE"/>
+            <!-- Fim GAP GRC14 -->
+            <buttonReference button.idref="OBJECT_SAVE_AND_NEXT"/>
+            <buttonReference button.idref="OBJECT_DELETE"/>
+            <buttonReference button.idref="OBJECT_REACTIVATE"/>
+            <buttonReference button.idref="OBJECT_TRANSFER"/>
+            <buttonReference button.idref="OBJECT_COPY_LOSSVALUES"/>
+            <buttonReference button.idref="PDF_REPORT"/>
+        </formButtons>
+        <page id="riskassessment" licensedComponentIds="rm">
+        	<javaScriptRef scriptName="custom"/>
+            <rowGroup id="riskassessment.1">
+                <row id="client_sign">
+                    <element attribute.idref="client_sign" template="clientSign"/>
+                </row>
+                <row id="process_model_name" propertyKey="form.row.risk.assessment.process_model_name.DBI">
+                    <element attribute.idref="process" template="childAttribute">
+                        <parameter name="listAttribute1" value="model_name"/>
+                    </element>
+                </row>
+                <row id="process" propertyKey="form.row.risk.assessment.process.DBI">
+                    <element attribute.idref="process">
+                        <button.add button.idref="OBJECTLINK" location="row"/>
+                        <button.add button.idref="MODELLINK" location="row"/>
+                    </element>
+                </row>
+                <row id="risk">
+                    <element attribute.idref="risk">
+                        <parameter name="selectionList" value="AUTO"/>
+                    </element>
+                </row>
+            </rowGroup>
+            <rowGroup id="riskassessment.2">
+                <row id="obj_id" propertyKey="form.row.risk.assessment.id.DBI">
+                    <element attribute.idref="obj_id"/>
+                </row>
+                <row id="reviewer_group">
+                    <element attribute.idref="reviewer_group"/>
+                </row>
+                <row id="owner_group">
+                    <element attribute.idref="owner_group"/>
+                </row>
+                <row id="assessment_periode"
+                     propertyKey="form.row.risk.assessment.period.DBI">
+                    <cell separator=" - ">
+                        <element attribute.idref="plannedstartdate"/>
+                        <element attribute.idref="plannedenddate"/>
+                    </cell>
+                </row>
+                <row id="execution_date">
+                    <element attribute.idref="execution_date"/>
+                </row>
+                <row id="owner">
+                    <element attribute.idref="owner" template="userSubstitute">
+                        <parameter name="substitute" value="owner_substitute"/>
+                    </element>
+                </row>
+            </rowGroup>
+            <rowGroup id="riskassessment.3">
+                <row id="risk_category">
+                    <element attribute.idref="risk_category"/>
+                </row>
+                <row id="organizational_unit">
+                    <element attribute.idref="orgunit"/>
+                </row>
+                <row id="application_system_type">
+                    <element attribute.idref="appsystem"/>
+                </row>
+                <row id="finaccount">
+                    <element attribute.idref="finaccount"/>
+                </row>
+                <row id="assessment_activities">
+                    <element attribute.idref="assessment_activities"/>
+                </row>
+                <row id="basis_of_valuation">
+                    <element attribute.idref="basis_of_valuation"/>
+                </row>
+                <row id="data_source">
+                    <element attribute.idref="data_source"/>
+                </row>
+                <row id="currency">
+                    <element attribute.idref="currency">
+                        <javaScriptEvent expression="aam_objectcommand('cache')" name="onChange"/>
+                    </element>
+                </row>
+                <!-- Inicio GAP GRC29 -->
+				<row id="progress">
+            		<element attribute.idref="progress"/>
+            	</row>                
+                <!-- Fim GAP GRC29 -->
+            </rowGroup>
+            <rowGroup id="riskassessment.5">
+                <row id="owner_status">
+                    <element attribute.idref="owner_status">
+                        <javaScriptEvent expression="aam_objectcommand('cache')" name="onChange"/>
+                    </element>
+                </row>
+                <row id="reviewer_status">
+                    <element attribute.idref="reviewer_status">
+                        <javaScriptEvent expression="aam_objectcommand('cache')" name="onChange"/>
+                    </element>
+                </row>
+                <row id="documents">
+                    <element attribute.idref="documents" template="doclink">
+                        <parameter name="selectionList" value="AUTO"/>
+                    </element>
+                </row>
+                <row id="remark">
+                    <element attribute.idref="remark"/>
+                </row>
+            </rowGroup>
+        </page>
+        <page id="ra_impacttypes" licensedComponentIds="rm">
+			<!-- Inicio GAP GRC29 -->
+            <rowGroup id="riskassessment.7">
+           		<row id="result_assessment">
+            		<element attribute.idref="result_assessment"/>
+            	</row>
+            	<row id="height">
+            		<element attribute.idref="height"/>
+            	</row>
+            </rowGroup>
+            <!-- Fim GAP GRC29 -->        
+            <rowGroup id="riskassessment.6">
+                <row id="impacttypes" attribute.idref="impacttypes" template="riskassessmentStructure"/>
+            </rowGroup>
+        </page>
+    </form>    
+    
+    <form id="FORM_RA_IMPACTTYPE">
+        <logToolbarButtons>
+            <buttonReference button.idref="ARIS_REPORT"/>
+        </logToolbarButtons>
+        <formButtons>
+            <buttonReference button.idref="OBJECT_SAVE"/>
+            <buttonReference button.idref="OBJECT_SAVE_AND_NEXT"/>
+            <buttonReference button.idref="PDF_REPORT"/>
+        </formButtons>
+        <page id="frequency">
+            <rowGroup id="riskassessment_impacttype.1">          
+                <row id="type">
+                    <element attribute.idref="type">
+                        <javaScriptEvent expression="aam_objectcommand('cache')" name="onChange"/>
+                    </element>
+                </row>
+            </rowGroup>
+            <rowGroup id="riskassessment_impacttype.2">
+                <row id="amount_of_damage"
+                     propertyKey="form.row.risk.assessment.loss.DBI"
+                     errorModel="local">
+                    <cell separator="{td}">
+                        <element attribute.idref="min_loss" name="min_amount_title" template="label">
+                            <parameter name="propertyKey" value="form.risk.assessment.minimum.DBI"/>
+                        </element>
+                        <element attribute.idref="min_loss" template="stringEnum">
+                            <parameter name="enumProperty" value="currency"/>
+                            <parameter name="maxLength" value="20"/>
+                            <parameter name="size" value="20"/>
+                        </element>
+                    </cell>
+                    <cell separator="{td}">
+                        <element attribute.idref="avg_loss" name="avg_amount_title" template="label">
+                            <parameter name="propertyKey" value="form.risk.assessment.average.DBI"/>
+                        </element>
+                        <element attribute.idref="avg_loss" template="stringEnum">
+                            <parameter name="enumProperty" value="currency"/>
+                            <parameter name="maxLength" value="20"/>
+                            <parameter name="size" value="20"/>
+                        </element>
+                    </cell>
+                    <cell separator="{td}">
+                        <element attribute.idref="max_loss" name="max_amount_title" template="label">
+                            <parameter name="propertyKey" value="form.risk.assessment.maximum.DBI"/>
+                        </element>
+                        <element attribute.idref="max_loss" template="stringEnum">
+                            <parameter name="enumProperty" value="currency"/>
+                            <parameter name="maxLength" value="20"/>
+                            <parameter name="size" value="20"/>
+                        </element>
+                    </cell>
+                </row>
+                <row id="frequ_amount_of_damage"
+                     propertyKey="form.row.risk.assessment.frequ.loss.DBI"
+                     errorModel="local">
+                    <cell separator="{td}">
+                        <element attribute.idref="frequ_min_loss" name="frequ_min_amount_title" template="label">
+                            <parameter name="propertyKey" value="form.risk.assessment.minimum.DBI"/>
+                        </element>
+                        <element attribute.idref="frequ_min_loss" template="textField">
+                            <parameter name="alignment" value="right"/>
+                            <parameter name="size" value="20"/>
+                        </element>
+                    </cell>
+                    <cell separator="{td}">
+                        <element attribute.idref="frequ_avg_loss" name="frequ_avg_amount_title" template="label">
+                            <parameter name="propertyKey" value="form.risk.assessment.average.DBI"/>
+                        </element>
+                        <element attribute.idref="frequ_avg_loss" template="textField">
+                            <parameter name="alignment" value="right"/>
+                            <parameter name="size" value="20"/>
+                        </element>
+                    </cell>
+                    <cell separator="{td}">
+                        <element attribute.idref="frequ_max_loss" name="frequ_max_amount_title" template="label">
+                            <parameter name="propertyKey" value="form.risk.assessment.maximum.DBI"/>
+                        </element>
+                        <element attribute.idref="frequ_max_loss" template="textField">
+                            <parameter name="alignment" value="right"/>
+                            <parameter name="size" value="20"/>
+                        </element>
+                    </cell>
+                </row>
+                <row id="red_amount_of_damage"
+                     propertyKey="form.row.risk.assessment.reduced.loss.DBI"
+                     errorModel="local">
+                    <cell separator="{td}">
+                        <element attribute.idref="red_min_loss" name="red_min_amount_title" template="label">
+                            <parameter name="propertyKey" value="form.risk.assessment.minimum.DBI"/>
+                        </element>
+                        <element attribute.idref="red_min_loss" template="stringEnum">
+                            <parameter name="enumProperty" value="currency"/>
+                            <parameter name="maxLength" value="20"/>
+                            <parameter name="size" value="20"/>
+                        </element>
+                    </cell>
+                    <cell separator="{td}">
+                        <element attribute.idref="red_avg_loss" name="red_avg_amount_title" template="label">
+                            <parameter name="propertyKey" value="form.risk.assessment.average.DBI"/>
+                        </element>
+                        <element attribute.idref="red_avg_loss" template="stringEnum">
+                            <parameter name="enumProperty" value="currency"/>
+                            <parameter name="maxLength" value="20"/>
+                            <parameter name="size" value="20"/>
+                        </element>
+                    </cell>
+                    <cell separator="{td}">
+                        <element attribute.idref="red_max_loss" name="red_max_amount_title" template="label">
+                            <parameter name="propertyKey" value="form.risk.assessment.maximum.DBI"/>
+                        </element>
+                        <element attribute.idref="red_max_loss" template="stringEnum">
+                            <parameter name="enumProperty" value="currency"/>
+                            <parameter name="maxLength" value="20"/>
+                            <parameter name="size" value="20"/>
+                        </element>
+                    </cell>
+                </row>
+                <row id="frequ_red_amount_of_damage"
+                     propertyKey="form.row.risk.assessment.reduced.frequ.loss.DBI"
+                     errorModel="local">
+                    <cell separator="{td}">
+                        <element attribute.idref="red_frequ_min_loss" name="frequ_red_min_amount_title" template="label">
+                            <parameter name="propertyKey" value="form.risk.assessment.minimum.DBI"/>
+                        </element>
+                        <element attribute.idref="red_frequ_min_loss" template="textField">
+                            <parameter name="alignment" value="right"/>
+                            <parameter name="size" value="20"/>
+                        </element>
+                    </cell>
+                    <cell separator="{td}">
+                        <element attribute.idref="red_frequ_avg_loss" name="frequ_red_avg_amount_title" template="label">
+                            <parameter name="propertyKey" value="form.risk.assessment.average.DBI"/>
+                        </element>
+                        <element attribute.idref="red_frequ_avg_loss" template="textField">
+                            <parameter name="alignment" value="right"/>
+                            <parameter name="size" value="20"/>
+                        </element>
+                    </cell>
+                    <cell separator="{td}">
+                        <element attribute.idref="red_frequ_max_loss" name="frequ_red_max_amount_title" template="label">
+                            <parameter name="propertyKey" value="form.risk.assessment.maximum.DBI"/>
+                        </element>
+                        <element attribute.idref="red_frequ_max_loss" template="textField">
+                            <parameter name="alignment" value="right"/>
+                            <parameter name="size" value="20"/>
+                        </element>
+                    </cell>
+                </row>
+            </rowGroup>
+            <rowGroup id="riskassessment_impacttype.3">
+                <row id="exp_loss"
+                     propertyKey="form.row.risk.assessment.expected.loss.DBI"
+                     errorModel="local">
+                    <cell separator="{td}">
+                        <element attribute.idref="exp_min_loss" name="min_exp_loss_title" template="label">
+                            <parameter name="propertyKey" value="form.risk.assessment.minimum.DBI"/>
+                        </element>
+                        <element attribute.idref="exp_min_loss" template="stringEnum">
+                            <parameter name="enumProperty" value="currency"/>
+                            <parameter name="size" value="20"/>
+                        </element>
+                    </cell>
+                    <cell separator="{td}">
+                        <element attribute.idref="exp_avg_loss" name="avg_exp_loss_title" template="label">
+                            <parameter name="propertyKey" value="form.risk.assessment.average.DBI"/>
+                        </element>
+                        <element attribute.idref="exp_avg_loss" template="stringEnum">
+                            <parameter name="enumProperty" value="currency"/>
+                            <parameter name="size" value="20"/>
+                        </element>
+                    </cell>
+                    <cell separator="{td}">
+                        <element attribute.idref="exp_max_loss" name="max_exp_loss_title" template="label">
+                            <parameter name="propertyKey" value="form.risk.assessment.maximum.DBI"/>
+                        </element>
+                        <element attribute.idref="exp_max_loss" template="stringEnum">
+                            <parameter name="enumProperty" value="currency"/>
+                            <parameter name="size" value="20"/>
+                        </element>
+                    </cell>
+                </row>
+                <row id="red_exp_loss"
+                     propertyKey="form.row.risk.assessment.reduced.expected.loss.DBI"
+                     errorModel="local">
+                    <cell separator="{td}">
+                        <element attribute.idref="red_exp_min_loss" name="red_min_exp_loss_title" template="label">
+                            <parameter name="propertyKey" value="form.risk.assessment.minimum.DBI"/>
+                        </element>
+                        <element attribute.idref="red_exp_min_loss" template="stringEnum">
+                            <parameter name="enumProperty" value="currency"/>
+                            <parameter name="size" value="20"/>
+                        </element>
+                    </cell>
+                    <cell separator="{td}">
+                        <element attribute.idref="red_exp_avg_loss" name="red_avg_exp_loss_title" template="label">
+                            <parameter name="propertyKey" value="form.risk.assessment.average.DBI"/>
+                        </element>
+                        <element attribute.idref="red_exp_avg_loss" template="stringEnum">
+                            <parameter name="enumProperty" value="currency"/>
+                            <parameter name="size" value="20"/>
+                        </element>
+                    </cell>
+                    <cell separator="{td}">
+                        <element attribute.idref="red_exp_max_loss" name="red_max_exp_loss_title" template="label">
+                            <parameter name="propertyKey" value="form.risk.assessment.maximum.DBI"/>
+                        </element>
+                        <element attribute.idref="red_exp_max_loss" template="stringEnum">
+                            <parameter name="enumProperty" value="currency"/>
+                            <parameter name="size" value="20"/>
+                        </element>
+                    </cell>
+                </row>
+            </rowGroup>
+            <rowGroup id="riskassessment_impacttype.4">
+                <row id="lossQual"
+                     errorModel="local">
+                    <element attribute.idref="lossQual" template="rmSelection">
+                        <parameter name="source" value="quotations" />
+                        <!-- <javaScriptEvent expression="aam_objectcommand('cache')" name="onChange"/> -->
+                        <javaScriptEvent expression="aam_objectcommand('customriskcache')" name="onChange"/>
+                    </element>
+                </row>
+                <!-- Inicio GAP GRC29: Exclusão de atributos desnecessários -->                 
+                <row id="frequLossQual"
+                     errorModel="local">
+                    <element attribute.idref="frequLossQual" template="rmSelection">
+                        <parameter name="source" value="frequencies" />
+                        <javaScriptEvent expression="aam_objectcommand('cache')" name="onChange"/>
+                    </element>
+                </row>
+                <row id="redLossQual"
+                     errorModel="local">
+                    <element attribute.idref="redLossQual" template="rmSelection">
+                        <parameter name="source" value="quotations" />
+                        <javaScriptEvent expression="aam_objectcommand('cache')" name="onChange"/>
+                    </element>
+                </row>
+                <row id="redFrequLossQual"
+                     errorModel="local">
+                    <element attribute.idref="redFrequLossQual" template="rmSelection">
+                        <parameter name="source" value="frequencies" />
+                        <javaScriptEvent expression="aam_objectcommand('cache')" name="onChange"/>
+                    </element>
+                </row>
+                <!-- Fim GAP GRC29 -->
+                <row id="th_impact_score">
+                    <element attribute.idref="th_impact_score">
+                        <parameter name="maxLength" value="20"/>
+                        <parameter name="size" value="20"/>
+                    </element>
+                </row>
+                <row id="th_red_impact_score">
+                    <element attribute.idref="th_red_impact_score">
+                        <parameter name="maxLength" value="20"/>
+                        <parameter name="size" value="20"/>
+                    </element>
+                </row>
+            </rowGroup>
+        </page>
+    </form>
+    
+	<form id="FORM_QUOTATION">
+        <logToolbarButtons>
+            <buttonReference button.idref="ARIS_REPORT"/>
+        </logToolbarButtons>
+        <formButtons>
+            <buttonReference button.idref="OBJECT_SAVE"/>
+            <buttonReference button.idref="OBJECT_SAVE_AND_NEXT"/>
+            <buttonReference button.idref="PDF_REPORT"/>
+        </formButtons>
+        <page id="quotation">
+            <rowGroup id="quotation.1">
+                <row id="name">
+                    <element attribute.idref="name" template="impactTypeName"/>
+                </row>
+                <row id="description">
+                    <element attribute.idref="description"/>
+                </row>
+                
+                <!-- Inicio GAP GRC29 -->
+                <!-- 
+                <row id="height">
+                	<element attribute.idref="height"/>
+                </row>
+                 -->
+                <!-- Fim GAP GRC29 -->
+                
+                <row id="value">
+                    <element attribute.idref="value"/>
+                </row>
+            </rowGroup>
+        </page>
+    </form>
+    
+    
+	<form id="FORM_ISSUE">
+        <logToolbarButtons>
+            <buttonReference button.idref="ARIS_REPORT"/>
+        </logToolbarButtons>
+        <formButtons>
+            <buttonReference button.idref="OBJECT_SAVE"/>
+            <buttonReference button.idref="OBJECT_SAVE_AND_NEXT"/>
+            <buttonReference button.idref="OBJECT_DELETE"/>
+            <buttonReference button.idref="OBJECT_REACTIVATE"/>
+            <buttonReference button.idref="PDF_REPORT"/>
+        </formButtons>
+        <page id="issue" licensedComponentIds="im">
+            <rowGroup id="issue.1">
+                <row id="name">
+                    <element attribute.idref="name"/>
+                </row>
+                <row id="obj_id" propertyKey="form.row.issue.id.DBI">
+                    <element attribute.idref="obj_id"/>
+                </row>
+                <row id="creator">
+                    <element attribute.idref="creator"/>
+                </row>
+                <row id="creator_status">
+                    <element attribute.idref="creator_status">
+                        <javaScriptEvent expression="aam_objectcommand('cache');" name="onChange"/>
+                    </element>
+                </row>
+            </rowGroup>
+            <rowGroup id="issue.2">
+				<!-- Teste -->
+				<row id="application_system_type">
+                    <element attribute.idref="appsystem">
+                        <parameter name="selectionList" value="hierarchyRoot"/>
+                        <button.add button.idref="RELATION_OPEN" location="toolbar"/>
+                    </element>
+                </row>
+				<!--
+                <row id="customsys">
+                    <element attribute.idref="customsys">
+                    	<parameter name="selectionList" value="customhierarchy"/>                  	
+                    </element>
+                </row>
+                -->                
+                <!-- Fim Teste -->            
+                <row id="description">
+                    <element attribute.idref="description"/>
+                </row>
+                <row id="remark">
+                    <element attribute.idref="remark"/>
+                </row>
+                <row id="issueRelevantObjects">
+                    <element attribute.idref="issueRelevantObjects" template="irorelations">
+                        <parameter name="selectionList" value="IssueRelevantObjectSelection"/>
+                        <button.remove button.idref="RELATION_OPEN" location="toolbar"/>
+                        <button.remove button.idref="RELATION_DETACH" location="toolbar"/>
+                    </element>
+                </row>
+                <row id="created_by_testcase">
+                    <element attribute.idref="created_by_testcase"/>
+                </row>
+                <row id="priority">
+                    <element attribute.idref="priority"/>
+                </row>
+                <row id="category">
+                    <element attribute.idref="category"/>
+                </row>
+                <row id="immediateMeasure">
+                    <element attribute.idref="immediateMeasure"/>
+                </row>
+                <row id="remediationMeasure">
+                    <element attribute.idref="remediationMeasure"/>
+                </row>
+                <row id="plannedenddate">
+                    <element attribute.idref="plannedenddate">
+                        <javaScriptEvent expression="aam_objectcommand('cache');" name="onChange"/>
+                    </element>
+                </row>
+                <row id="owners">
+                    <element attribute.idref="owners">
+                        <parameter name="selectionList" value="IssueOwnerSelection"/>
+                    </element>
+                </row>
+                <row id="owner">
+                    <element attribute.idref="owner" template="userSubstitute">
+                        <parameter name="substitute" value="owner_substitute"/>
+                    </element>
+                </row>
+                <row id="owner_status">
+                    <element attribute.idref="owner_status">
+                        <javaScriptEvent expression="aam_objectcommand('cache')" name="onChange"/>
+                    </element>
+                </row>
+                <row id="owner_remark">
+                    <element attribute.idref="owner_remark"/>
+                </row>
+                <row id="reviewers">
+                    <element attribute.idref="reviewers">
+                        <parameter name="selectionList" value="IssueReviewerSelection"/>
+                    </element>
+                </row>
+                <row id="reviewer_status">
+                    <element attribute.idref="reviewer_status">
+                        <javaScriptEvent expression="aam_objectcommand('cache')" name="onChange"/>
+                    </element>
+                </row>
+                <row id="reviewer_remark">
+                    <element attribute.idref="reviewer_remark"/>
+                </row>
+                <row id="stateTime">
+                    <element attribute.idref="stateTime"/>
+                </row>
+                <row id="documents">
+                    <element attribute.idref="documents" template="doclink">
+                        <parameter name="selectionList" value="AUTO"/>
+                    </element>
+                </row>
+            </rowGroup>
+        </page>
+    </form>
+    
+    <form id="FORM_TESTDEFINITION">
+        <logToolbarButtons>
+            <buttonReference button.idref="ARIS_REPORT"/>
+        </logToolbarButtons>
+        <formButtons>
+            <buttonReference button.idref="OBJECT_SAVE"/>
+            <buttonReference button.idref="OBJECT_SAVE_AND_NEXT"/>
+            <buttonReference button.idref="OBJECT_DELETE"/>
+            <buttonReference button.idref="OBJECT_REACTIVATE"/>
+            <buttonReference button.idref="PDF_REPORT"/>
+        </formButtons>
+        <page id="testdefinition" licensedComponentIds="tm">
+            <rowGroup id="testdefinition.1">
+                <row id="client_sign">
+                    <element attribute.idref="client_sign" template="clientSign"/>
+                </row>
+                <row id="name">
+                    <element attribute.idref="name"/>
+                </row>
+                
+                <!-- GAP-GRC52 Inicio--> 
+                <row id="origemteste">
+                    <element attribute.idref="origemteste"/>
+                </row>          
+				<!-- GAP-GRC52 Fim-->   
+                
+                <row id="testingsteps">
+                    <element attribute.idref="testingsteps"/>
+                </row>
+                <row id="test_nature">
+                    <element attribute.idref="test_nature"/>
+                </row>
+                <row id="testtype">
+                    <element attribute.idref="testtype"/>
+                </row>
+                <row id="testextend">
+                    <element attribute.idref="testextend"/>
+                </row>
+                <row id="manager_group">
+                    <element attribute.idref="manager_group" >
+                        <parameter name="selectionList" value="AUTO"/>
+                        <button.add button.idref="RELATION_CREATE" location="toolbar" type="writable"/>
+                    </element>
+                </row>
+                <row id="owner_group">
+                    <element attribute.idref="owner_group">
+                        <parameter name="selectionList" value="testdefinition_ownergroup_sel"/>
+                        <button.add button.idref="RELATION_CREATE" location="toolbar" type="writable"/>
+                    </element>
+                </row>
+                <row id="frequency">
+                    <element attribute.idref="frequency">
+                        <javaScriptEvent expression="aam_objectcommand('cache');" name="onChange"/>
+                    </element>
+                </row>
+                <row id="event_driven_allowed">
+                    <element attribute.idref="event_driven_allowed"/>
+                </row>
+                <row id="duration">
+                    <element attribute.idref="duration"/>
+                </row>
+                <row id="startdate">
+                    <element attribute.idref="startdate"/>
+                </row>
+                <row id="enddate">
+                    <element attribute.idref="enddate">
+                        <parameter name="userEditable" value="true"/>
+                    </element>
+                </row>
+                <row id="control_period">
+                    <element attribute.idref="control_period"/>
+                </row>
+                <row id="offset">
+                    <element attribute.idref="control_period_offset"/>
+                </row>
+                <row id="reviewer_group">
+                    <element attribute.idref="reviewer_group">
+                        <parameter name="selectionList" value="AUTO"/>
+                        <button.add button.idref="RELATION_CREATE" location="toolbar" type="writable"/>
+                    </element>
+                </row>
+                <row id="effected_orgunit">
+                    <element attribute.idref="orgunit">
+                        <parameter name="selectionList" value="AUTO"/>
+                    </element>
+                </row>
+                <!--
+                <row id="walkthroughName">
+                    <element attribute.idref="walkthroughName" />
+                </row>
+                <row id="walkthroughCounter">
+                    <element attribute.idref="walkthroughCounter" />
+                </row>
+                -->
+                <row id="isfollowup">
+                    <element attribute.idref="isfollowup"/>
+                </row>
+            </rowGroup>
+        </page>
+    </form>
+    
+	<form id="FORM_CONTROLEXECUTION">
+        <logToolbarButtons>
+            <buttonReference button.idref="ARIS_REPORT"/>
+        </logToolbarButtons>
+        <formButtons>
+            <buttonReference button.idref="OBJECT_SAVE"/>
+            <buttonReference button.idref="OBJECT_SAVE_AND_NEXT"/>
+            <buttonReference button.idref="OBJECT_DELETE"/>
+            <buttonReference button.idref="OBJECT_REACTIVATE"/>
+            <buttonReference button.idref="PDF_REPORT"/>
+        </formButtons>
+        <page id="controlexecution" licensedComponentIds="tm">
+            <rowGroup id="controlexecution.1">
+                <row id="obj_id">
+                    <element attribute.idref="obj_id"/>
+                </row>
+                <row id="client_sign">
+                    <element attribute.idref="client_sign" template="clientSign"/>
+                </row>
+                <row id="control">
+                    <element attribute.idref="control"/>
+                </row>
+                <row id="controlexecutiontask">
+                    <element attribute.idref="controlexecutiontask"/>
+                </row>
+                <row id="activities">
+                    <element attribute.idref="activities"/>
+                </row>
+                <row id="selectivity">
+                    <element attribute.idref="selectivity"/>
+                </row>
+                <row id="result_format">
+                    <element attribute.idref="result_format"/>
+                </row>
+                <row id="owner_group">
+                    <element attribute.idref="owner_group"/>
+                </row>
+                <row id="accomplish_period" propertyKey="form.row.controlexecution.accomplish.period.DBI">
+                    <cell separator=" - ">
+                        <element attribute.idref="plannedstartdate"/>
+                        <element attribute.idref="plannedenddate">
+                            <javaScriptEvent expression="aam_objectcommand('cache');" name="onChange"/>
+                        </element>
+                    </cell>
+                </row>
+                <row id="documented_period" propertyKey="form.row.controlexecution.documented.period.DBI">
+                    <cell separator=" - ">
+                        <element attribute.idref="controlstartdate"/>
+                        <element attribute.idref="controlenddate"/>
+                    </cell>
+                </row>
+                <row id="documents">
+                    <element attribute.idref="documents" template="doclink">
+                        <parameter name="selectionList" value="AUTO"/>
+                    </element>
+                </row>
+                <row id="items_to_control">
+                    <element attribute.idref="items_to_control"/>
+                </row>
+                <row id="items_actual_controlled">
+                    <element attribute.idref="items_actual_controlled"/>
+                </row>
+                <row id="selected_sample_data">
+                    <element attribute.idref="selected_sample_data"/>
+                </row>
+                <row id="sum_items_ok">
+                    <element attribute.idref="sum_items_ok"/>
+                </row>
+                <row id="sum_items_not_ok">
+                    <element attribute.idref="sum_items_not_ok"/>
+                </row>
+                <row id="anomalies_description">
+                    <element attribute.idref="anomalies_description"/>
+                </row>
+                <row id="completion_rate">
+                    <element attribute.idref="completion_rate"/>
+                </row>
+                <row id="anomaly_rate">
+                    <element attribute.idref="anomaly_rate"/>
+                </row>
+                <row id="owner_status">
+                    <element attribute.idref="owner_status">
+                        <javaScriptEvent expression="aam_objectcommand('cache');" name="onChange"/>
+                    </element>
+                </row>
+                <row id="due_status">
+                    <element attribute.idref="due_status"/>
+                </row>
+                <!-- Inicio GAP GRC98 -->
+                <!-- 
+                <row id="owner">
+                    <element attribute.idref="owner" template="userSubstitute">
+                        <parameter name="substitute" value="owner_substitute"/>
+                    </element>
+                </row>
+                -->
+                <!-- Fim GAP GRC98 : Exclusão de Atributos Desnecessários -->
+                <row id="execution_date">
+                    <element attribute.idref="execution_date"/>
+                </row>
+                <row id="remark">
+                    <element attribute.idref="remark"/>
+                </row>
+                <!-- Inicio GAP GRC98 : Exclusão de Atributos Desnecessários -->
+                <!-- 
+                <row id="execution_documents">
+                    <element attribute.idref="execution_documents" template="doclink">
+                        <parameter name="selectionList" value="AUTO"/>
+                    </element>
+                </row>
+                -->
+                <row id="custom_controlexecstatus"> 
+                	<element attribute.idref="custom_controlexecstatus">
+                		<javaScriptEvent expression="aam_objectcommand('cache');" name="onChange"/>
+                	</element>
+                </row>
+                <!-- Fim GAP GRC98 -->
+            </rowGroup>
+        </page>
+    </form>    
+       
+    
+</custom>

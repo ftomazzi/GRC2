@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<migrationPlan xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:noNamespaceSchemaLocation="./xsd/migrationPlan.xsd">
+
+    <!-- 3.1.4 => 4.0 -->
+    <migration name="3.1.0_to_4.0_RBA" source="ARCM_3.1_standard_001" target="arcm_4.0.0_rba_standard" approach="rba" implementation="mig31SR4To40"/>
+    <migration name="3.1.0_to_4.0_CBA" source="ARCM_3.1_standard_001" target="arcm_4.0.0_cba_standard" approach="cba" implementation="mig31SR4To40"/>
+    <migration name="3.1.0_to_4.0_RBA" source="ARCM_3.1_risk.standard_001" target="arcm_4.0.0_rba_standard" approach="rba" implementation="mig31SR4To40"/>
+    <migration name="3.1.0_to_4.0_CBA" source="ARCM_3.1_control.standard_001" target="arcm_4.0.0_cba_standard" approach="cba" implementation="mig31SR4To40"/>
+
+    <!-- 4.0.x => 4.0.y -->
+    <migration name="4.0_to_4.0.0.2_RBA" source="arcm_4.0.0_rba_standard" target="arcm_4.0.0.2_rba_standard" approach="rba" implementation="mig40To4002"/>
+    <migration name="4.0_to_4.0.0.2_CBA" source="arcm_4.0.0_cba_standard" target="arcm_4.0.0.2_cba_standard" approach="cba" implementation="mig40To4002"/>
+
+    <migration name="4.0.0.2_fixClientSignContainer_RBA" source="arcm_4.0.0.2_rba_standard" target="arcm_4.0.0.2_rba_standard" approach="rba" implementation="migFix4002" fix="true"/>
+    <migration name="4.0.0.2_fixClientSignContainer_CBA" source="arcm_4.0.0.2_cba_standard" target="arcm_4.0.0.2_cba_standard" approach="cba" implementation="migFix4002" fix="true"/>
+
+    <migration name="4.0.0.2_to_4.0.0.6_RBA" source="arcm_4.0.0.2_rba_standard" target="arcm_4.0.0.6_rba_standard" approach="rba" implementation="mig4002To4006"/>
+    <migration name="4.0.0.2_to_4.0.0.6_CBA" source="arcm_4.0.0.2_cba_standard" target="arcm_4.0.0.6_cba_standard" approach="cba" implementation="mig4002To4006"/>
+
+    <migration name="4.0.0.6_fixMessageTemplateObjectEntries_RBA" source="arcm_4.0.0.6_rba_standard" target="arcm_4.0.0.6_rba_standard" approach="rba" implementation="migFix4006" fix="true"/>
+    <migration name="4.0.0.6_fixMessageTemplateObjectEntries_CBA" source="arcm_4.0.0.6_cba_standard" target="arcm_4.0.0.6_cba_standard" approach="cba" implementation="migFix4006" fix="true"/>
+
+    <migration name="4.0.0.6_to_4.0.0.9_RBA" source="arcm_4.0.0.6_rba_standard" target="arcm_4.0.0.9_rba_standard" approach="rba" implementation="mig4006To4009"/>
+    <migration name="4.0.0.6_to_4.0.0.9_CBA" source="arcm_4.0.0.6_cba_standard" target="arcm_4.0.0.9_cba_standard" approach="cba" implementation="mig4006To4009"/>
+
+    <!-- 4.0.x => 4.1 -->
+    <migration name="4.0.0.9_to_4.1_RBA" source="arcm_4.0.0.9_rba_standard" target="arcm_4.1.0.0_rba_standard" approach="rba" implementation="mig40xTo41" />
+    <migration name="4.0.0.9_to_4.1_CBA" source="arcm_4.0.0.9_cba_standard" target="arcm_4.1.0.0_cba_standard" approach="cba" implementation="mig40xTo41" />
+
+    <!-- 4.1.x => 4.1.y -->
+    <migration name="4.1.0.0_to_4.1.0.2_RBA" source="arcm_4.1.0.0_rba_standard" target="arcm_4.1.0.2_rba_standard" approach="rba" implementation="mig4100To4102" />
+    <migration name="4.1.0.0_to_4.1.0.2_CBA" source="arcm_4.1.0.0_cba_standard" target="arcm_4.1.0.2_cba_standard" approach="cba" implementation="mig4100To4102" />
+
+    <migration name="4.1.0.2_InternalMessageSubjectSize_RBA" source="arcm_4.1.0.2_rba_standard" target="arcm_4.1.0.2_rba_standard" approach="rba" implementation="migFix4105" fix="true"/>
+    <migration name="4.1.0.2_InternalMessageSubjectSize_CBA" source="arcm_4.1.0.2_cba_standard" target="arcm_4.1.0.2_cba_standard" approach="cba" implementation="migFix4105" fix="true"/>
+    
+    <migration name="4.1.0.2_to_4.1.0.8_RBA" source="arcm_4.1.0.2_rba_standard" target="arcm_4.1.0.8_rba_standard" approach="rba" implementation="mig4102To4108"/>
+    <migration name="4.1.0.2_to_4.1.0.8_RBA" source="arcm_4.1.0.2_cba_standard" target="arcm_4.1.0.8_cba_standard" approach="cba" implementation="mig4102To4108"/>
+	
+    <!-- 4.1.x => 9.5 -->
+    <migration name="4.1.0.x_to_9.5.0.0_RBA" source="arcm_4.1.0.8_rba_standard" target="9.5.0.0_rba_standard" approach="rba" implementation="mig41xTo9500" />
+    <migration name="4.1.0.x_to_9.5.0.0_CBA" source="arcm_4.1.0.8_cba_standard" target="9.5.0.0_cba_standard" approach="cba" implementation="mig41xTo9500" />
+
+    <!-- 9.5.x => 9.6 -->
+    <migration name="9.5.0.x_to_9.6.0.1_RBA" source="9.5.0.0_rba_standard" target="9.6.0.1_rba_standard" approach="rba" implementation="mig95xTo9601" />
+    <migration name="9.5.0.x_to_9.6.0.1_CBA" source="9.5.0.0_cba_standard" target="9.6.0.1_cba_standard" approach="cba" implementation="mig95xTo9601" />
+
+    <!-- 9.6.x => 9.7 -->
+    <migration name="9.6.0.x_to_9.7.0.0_RBA" source="9.6.0.1_rba_standard" target="9.7.0.0_rba_standard" approach="rba" implementation="mig96xTo9700" />
+    <migration name="9.6.0.x_to_9.7.0.0_CBA" source="9.6.0.1_cba_standard" target="9.7.0.0_cba_standard" approach="cba" implementation="mig96xTo9700" />
+
+    <!-- 9.7.0.0 => 9.7.1.1 (9.7.1.1 was never officially available for download) -->
+    <migration name="9.7.0.0_to_9.7.1.1_RBA" source="9.7.0.0_rba_standard" target="9.7.1.1_rba_standard" approach="rba" implementation="mig9700To9711" />
+    <migration name="9.7.0.0_to_9.7.1.1_CBA" source="9.7.0.0_cba_standard" target="9.7.1.1_cba_standard" approach="cba" implementation="mig9700To9711" />
+
+    <!-- 9.7.x => 9.8 -->
+    <migration name="9.7.x_to_9.8.0.0_RBA" source="9.7.1.1_rba_standard" target="9.8.0.0_rba_standard" approach="rba" implementation="mig97xTo9800" />
+    <migration name="9.7.x_to_9.8.0.0_CBA" source="9.7.1.1_cba_standard" target="9.8.0.0_cba_standard" approach="cba" implementation="mig97xTo9800" />
+
+    <!-- 9.8.x => 9.8.2.0 -->
+    <migration name="9.8.x_to_9.8.2.0_RBA" source="9.8.0.0_rba_standard" target="9.8.2.0_rba_standard" approach="rba" implementation="mig98xTo9820" />
+    <migration name="9.8.x_to_9.8.2.0_CBA" source="9.8.0.0_cba_standard" target="9.8.2.0_cba_standard" approach="cba" implementation="mig98xTo9820" />
+
+    <!-- 9.8.2 => 9.8.4.0 -->
+    <migration name="9.8.2.0_RBA_to_9.8.4.0_RBA" source="9.8.2.0_rba_standard" target="9.8.4.0_rba_standard" approach="rba" implementation="mig9820To9840" />
+    <migration name="9.8.2.0_CBA_to_9.8.4.0_CBA" source="9.8.2.0_cba_standard" target="9.8.4.0_cba_standard" approach="cba" implementation="mig9820To9840" />
+
+    <!-- 9.8.4 => 9.8.5.1 -->
+    <migration name="9.8.4.0_RBA_to_9.8.5.1_RBA" source="9.8.4.0_rba_standard" target="9.8.5.1_rba_standard" approach="rba" implementation="mig9840To9851" />
+    <migration name="9.8.4.0_CBA_to_9.8.5.1_CBA" source="9.8.4.0_cba_standard" target="9.8.5.1_cba_standard" approach="cba" implementation="mig9840To9851" />
+
+    <!-- 9.8.4 => 9.8.6.0 -->
+    <migration name="9.8.5.1_RBA_to_9.8.6.0_RBA" source="9.8.5.1_rba_standard" target="9.8.6.0_rba_standard" approach="rba" implementation="mig9851To9860" />
+    <migration name="9.8.5.1_CBA_to_9.8.6.0_CBA" source="9.8.5.1_cba_standard" target="9.8.6.0_cba_standard" approach="cba" implementation="mig9851To9860" />
+
+	<!-- 9.8.6 => GPRCA -->
+	<migration name="9.8.6.0_RBA_to_GPRCA" source="9.8.6.0_rba_standard" target="9.8.6.0_rba_GPRCA" approach="rba" implementation="mig9860ToGPRCA" />
+</migrationPlan>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../xsd/custom.xsd">
+
+	<roles>
+	
+		<role id="issuemanager" level="XC" licensedComponentIds="im" userLicenses="operate">
+			<system component.idref="view.issues"/>
+			<system component.idref="check.issue"/>
+			<system component.idref="view.monitoring"/>
+			<system component.idref="view.mashzone.url.builder"/>
+	        <system component.idref="view.home.dashboards"/>
+			<object right.idref="r----" objectType.id="USERGROUP"/>
+	        <object right.idref="r----" objectType.id="JOBINFORMATION"/>
+	        <object right.idref="rwcdu" objectType.id="ISSUE">
+	            <relation right.idref="ar" listAttrType.id="creator"/>
+	            <relation right.idref="ar" listAttrType.id="owners"/>
+				<relation right.idref="ar" listAttrType.id="reviewers"/>
+				<relation right.idref="ar" listAttrType.id="documents"/>
+				<relation right.idref="ar" listAttrType.id="issueRelevantObjects"/>
+				<relation right.idref="ar" listAttrType.id="appsystem"/>
+	        </object>
+	        <object right.idref="r----" objectType.id="DASHBOARDCONNECTION"/>
+	    </role>
+	
+	</roles>
+
+</custom>

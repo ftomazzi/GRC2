@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../xsd/custom.xsd">
+    <!-- start your customizing here -->
+    <version application="9.8.6.0" />
+    <schema version="9.8.6.0" customizing="GPRCA"/>
+    
+    <objectType id="RISK" xmlexport="true" extends="RECURRING"
+                displayAttribute="name" descriptionAttributes="description" licensedComponentIds="tm,rm,il,in"
+                mashzoneId="40" arisImportRole="riskmanager" image="iconlib/icons/content/risk_16.png">
+        <enumAttrType id="risktype" enumeration="risktype"/>
+        <stringAttrType id="risk_id" maxCharCount="80">
+            <validate name="maxlength" arg0="80"/>
+        </stringAttrType>
+        <textAttrType id="description" isMassEditable="true"/>
+        <listAttrType id="process" maxSize="1" objectType.idref="HIERARCHY" linkType="47">
+            <listRestriction>
+                <attributeRestriction attribute="type" value="process"/>
+            </listRestriction>
+        </listAttrType>
+        <listAttrType id="finaccount" objectType.idref="HIERARCHY" linkType="48">
+            <listRestriction>
+                <attributeRestriction attribute="type" value="financialaccount"/>
+            </listRestriction>
+        </listAttrType>
+        <enumAttrType id="impact" enumeration="impact" defaultValue="0"/>
+        <enumAttrType id="probability" enumeration="probability" defaultValue="0"/>
+        <stringAttrType id="risk_catalog1" maxCharCount="200" isMassEditable="true">
+            <validate name="maxlength" arg0="200"/>
+        </stringAttrType>
+        <stringAttrType id="risk_catalog2" maxCharCount="200" isMassEditable="true">
+            <validate name="maxlength" arg0="200"/>
+        </stringAttrType>
+        <listAttrType id="documents" objectType.idref="DOCUMENT" linkType="5"/>
+        <listAttrType id="controls" objectType.idref="CONTROL" linkType="4"/>
+        <listAttrType id="manager_group" maxSize="1" objectType.idref="USERGROUP" linkType="52" >
+            <listRestriction>
+                <attributeRestriction attribute="role" value="riskmanager"/>
+                <attributeRestriction attribute="rolelevel" value="object"/>
+            </listRestriction>
+        </listAttrType>
+        <enumAttrType id="assertions" enumeration="assertion"/>
+        <!-- op Risk attributes-->
+        <booleanAttrType id="risk_management_relevant" defaultValue="false"/>
+        <textAttrType id="assessment_activities"/>
+        <enumAttrType id="frequency" enumeration="frequency_including_none" defaultValue="0"/>
+        <booleanAttrType id="event_driven_allowed" defaultValue="true"/>
+        <listAttrType id="owner_group" maxSize="1" objectType.idref="USERGROUP" linkType="3160">
+            <listRestriction>
+                <attributeRestriction attribute="role" value="riskowner"/>
+                <attributeRestriction attribute="rolelevel" value="object"/>
+            </listRestriction>
+        </listAttrType>
+        <listAttrType id="reviewer_group" maxSize="1" objectType.idref="USERGROUP" linkType="3161">
+            <listRestriction>
+                <attributeRestriction attribute="role" value="riskreviewer"/>
+                <attributeRestriction attribute="rolelevel" value="object"/>
+            </listRestriction>
+        </listAttrType>
+        <listAttrType id="risk_category" objectType.idref="HIERARCHY" linkType="3162">
+            <listRestriction>
+                <attributeRestriction attribute="type" value="category"/>
+            </listRestriction>
+        </listAttrType>
+        <listAttrType id="orgunit" objectType.idref="HIERARCHY" linkType="3163">
+            <listRestriction>
+                <attributeRestriction attribute="type" value="orgunit"/>
+            </listRestriction>
+        </listAttrType>
+        <listAttrType id="appsystem" objectType.idref="HIERARCHY" linkType="3164">
+            <listRestriction>
+                <attributeRestriction attribute="type" value="applicationsystemtype"/>
+            </listRestriction>
+        </listAttrType>
+        <enumAttrType id="currency" enumeration="currency" defaultValue="0"/>
+        <!-- Threshold values of op risk management -->
+        <doubleAttrType id="th_exp_avg_loss">
+            <validate name="double" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="double" arg0="leq:999999999999999:value.must.not.be.greater.than.bound.ERR"/>
+            <validate name="double" arg0="scale:2:value.must.have.at.most.decimal.places.ERR"/>
+        </doubleAttrType>
+        <doubleAttrType id="th_exp_max_loss">
+            <validate name="double" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="double" arg0="leq:999999999999999:value.must.not.be.greater.than.bound.ERR"/>
+            <validate name="double" arg0="scale:2:value.must.have.at.most.decimal.places.ERR"/>
+        </doubleAttrType>
+        <doubleAttrType id="th_exp_min_loss">
+            <validate name="double" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="double" arg0="leq:999999999999999:value.must.not.be.greater.than.bound.ERR"/>
+            <validate name="double" arg0="scale:2:value.must.have.at.most.decimal.places.ERR"/>
+        </doubleAttrType>
+        <doubleAttrType id="th_red_exp_avg_loss">
+            <validate name="double" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="double" arg0="leq:999999999999999:value.must.not.be.greater.than.bound.ERR"/>
+            <validate name="double" arg0="scale:2:value.must.have.at.most.decimal.places.ERR"/>
+        </doubleAttrType>
+        <doubleAttrType id="th_red_exp_max_loss">
+            <validate name="double" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="double" arg0="leq:999999999999999:value.must.not.be.greater.than.bound.ERR"/>
+            <validate name="double" arg0="scale:2:value.must.have.at.most.decimal.places.ERR"/>
+        </doubleAttrType>
+        <doubleAttrType id="th_red_exp_min_loss">
+            <validate name="double" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="double" arg0="leq:999999999999999:value.must.not.be.greater.than.bound.ERR"/>
+            <validate name="double" arg0="scale:2:value.must.have.at.most.decimal.places.ERR"/>
+        </doubleAttrType>
+        <enumAttrType id="notification_to" enumeration="assessment_notification"/>
+
+        <booleanAttrType id="rm_notifications_quantitative" defaultValue="false"/>
+        <doubleAttrType id="th_impact_score">
+            <validate name="double" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="double" arg0="leq:999999999999999:value.must.not.be.greater.than.bound.ERR"/>
+            <validate name="double" arg0="scale:2:value.must.have.at.most.decimal.places.ERR"/>
+        </doubleAttrType>
+        <doubleAttrType id="th_red_impact_score">
+            <validate name="double" arg0="geq:0:value.must.not.be.smaller.than.bound.ERR"/>
+            <validate name="double" arg0="leq:999999999999999:value.must.not.be.greater.than.bound.ERR"/>
+            <validate name="double" arg0="scale:2:value.must.have.at.most.decimal.places.ERR"/>
+        </doubleAttrType>
+        <booleanAttrType id="rm_notifications_qualitative" defaultValue="false"/>
+        
+        <!-- Inicio GAP GRC29 -->
+        
+        <!-- Inserção do Atributo "Exportação Relevante" -->
+        <booleanAttrType id="export_relevant" defaultValue="true" />
+        
+        <!-- Inserção do Atributo "Causa" -->
+        <!--
+        <textAttrType id="cause" isMassEditable="true" propertyKey="attribute.RISK.cause.DBI"/>
+        -->
+        
+        <!-- Inserção do Atributo "Consequencia" -->
+        <!-- 
+        <textAttrType id="consequence" isMassEditable="true" propertyKey="attribute.RISK.consequence.DBI"/>
+        -->
+        
+        <!-- Inserção do Atributo "Relevante para Gestão de Risco" -->
+        <!--
+        <booleanAttrType id="manage_relevant" defaultValue="true" />
+        -->
+        
+        <!-- Inserção do Atributo "Frequencia de Avaliação" -->
+        <!-- 
+        <stringAttrType id="freq_eval" defaultValue="Anual" />
+        -->
+        
+        <!-- Inserção do Atributo "Permitida Avaliação Orientada a Eventos" -->
+        <!-- 
+        <booleanAttrType id="event_driven_allowed" defaultValue="true" />
+        -->
+         
+        <!-- Inserção do Atributo "Tempo para Execução em Dias" -->
+        <!--
+        <textAttrType id="running_days" />
+        -->
+        
+        <!-- Fim GAP GRC29 -->
+
+
+        <index id="I_6_1" type="normal">
+            <attributeRef attribute="name"/>
+        </index>
+        <index id="I_6_2" type="normal">
+            <attributeRef attribute="impact"/>
+        </index>
+        <!--index id="I_6_3" type="fullText">
+            <attributeRef attribute="description"/>
+        </index-->
+        <index id="I_6_4" type="normal">
+            <attributeRef attribute="probability"/>
+        </index>
+        <index id="I_RISK_ID" type="normal">
+            <attributeRef attribute="risk_id"/>
+        </index>
+    </objectType>
+    
+    <form id="FORM_RISK">
+        <logToolbarButtons>
+            <buttonReference button.idref="ARIS_REPORT"/>
+        </logToolbarButtons>
+        <formButtons>
+            <buttonReference button.idref="OBJECT_SAVE"/>
+            <buttonReference button.idref="OBJECT_SAVE_AND_NEXT"/>
+            <buttonReference button.idref="OBJECT_DELETE"/>
+            <buttonReference button.idref="OBJECT_REACTIVATE"/>
+            <buttonReference button.idref="OBJECT_RISKASSESSMENT_CREATE"/>
+            <buttonReference button.idref="GOTO_CONNECT"/>
+            <buttonReference button.idref="PDF_REPORT"/>
+        </formButtons>
+        <page id="risk" licensedComponentIds="tm,rm,il,in">
+            <rowGroup id="risk.1">
+            	
+            	<!-- Inicio GAP GRC29: Inclusão do Atributo "Exportação Relevante" -->
+            	<row id="export_relevant">
+            		<element attribute.idref="export_relevant"/>
+            	</row>
+            	<!-- Fim GAP GRC29 -->
+                
+                <row id="client_sign">
+                    <element attribute.idref="client_sign" template="clientSign"/>
+                </row>
+                <row id="risk_id">
+                    <element attribute.idref="risk_id"/>
+                </row>
+                <row id="name">
+                    <element attribute.idref="name"/>
+                </row>
+                <row id="description">
+                    <element attribute.idref="description"/>
+                </row>
+                <row id="process">
+                    <element attribute.idref="process">
+                        <parameter name="selectionList" value="AUTO"/>
+                        <button.add button.idref="OBJECTLINK" location="row"/>
+                        <button.add button.idref="MODELLINK" location="row"/>
+                        <button.add button.idref="CONNECTLINK" location="row"/>
+                    </element>
+                </row>
+                <row id="impact">
+                    <element attribute.idref="impact"/>
+                </row>
+                <row id="probability">
+                    <element attribute.idref="probability"/>
+                </row>
+                <row id="finaccount">
+                    <element attribute.idref="finaccount">
+                        <parameter name="selectionList" value="AUTO"/>
+                    </element>
+                </row>
+                <row id="risktype">
+                    <element attribute.idref="risktype">
+                        <javaScriptEvent expression="aam_objectcommand('cache')" name="onClick"/>
+                    </element>
+                </row>
+                <row id="manager_group">
+                    <element attribute.idref="manager_group">
+                        <parameter name="selectionList" value="AUTO"/>
+                        <button.add button.idref="RELATION_CREATE" location="toolbar" type="writable"/>
+                    </element>
+                </row>
+                <!-- GRC29 : Exclusão de atributos desnecessários
+                <row id="assertions">
+                    <element attribute.idref="assertions"/>
+                </row>
+                -->
+                <row id="documents">
+                    <element attribute.idref="documents" template="doclink">
+                        <parameter name="selectionList" value="AUTO"/>
+                    </element>
+                </row>
+                <!-- GRC29 : Exclusão de atributos desnecessários
+                <row id="risk_catalog1">
+                    <element attribute.idref="risk_catalog1"/>
+                </row>
+                <row id="risk_catalog2">
+                    <element attribute.idref="risk_catalog2"/>
+                </row>
+                -->
+                
+                <!-- Inicio GAP GRC29 -->
+                
+                <!-- Inclusão do Atributo "Causa" -->
+                <!--  
+                <row id="cause">
+                	<element attribute.idref="cause"/>
+                </row>
+                -->
+                
+                <!-- Inclusão do Atributo "Consequencia" -->
+                <!-- 
+                <row id="consequence">
+                	<element attribute.idref="consequence"/>
+                </row>
+                 -->               
+                
+                <!-- Fim GAP GRC29 -->
+                
+            </rowGroup>
+        </page>
+        <page id="riskassessment" licensedComponentIds="rm,il,in">
+            <rowGroup id="riskassessment.1">
+                <row id="risk_management_relevant">
+                    <element attribute.idref="risk_management_relevant">
+                        <javaScriptEvent expression="aam_objectcommand('cache');" name="onClick"/>
+                    </element>
+                </row>
+                <row id="assessment_activities">
+                    <element attribute.idref="assessment_activities"/>
+                </row>
+                <row id="frequency">
+                    <element attribute.idref="frequency">
+                        <javaScriptEvent expression="aam_objectcommand('cache');" name="onChange"/>
+                    </element>
+                </row>
+                <row id="event_driven_allowed">
+                    <element attribute.idref="event_driven_allowed"/>
+                </row>
+                <row id="duration">
+                    <element attribute.idref="duration"/>
+                </row>
+                <row id="startdate">
+                    <element attribute.idref="startdate"/>
+                </row>
+                <row id="enddate">
+                    <element attribute.idref="enddate"/>
+                </row>
+                <row id="owner_group">
+                    <element attribute.idref="owner_group">
+                        <parameter name="selectionList" value="AUTO"/>
+                        <button.add button.idref="RELATION_CREATE" location="toolbar" type="writable"/>
+                    </element>
+                </row>
+                <row id="reviewer_group">
+                    <element attribute.idref="reviewer_group">
+                        <parameter name="selectionList" value="AUTO"/>
+                        <button.add button.idref="RELATION_CREATE" location="toolbar" type="writable"/>
+                    </element>
+                </row>
+                <row id="risk_category">
+                    <element attribute.idref="risk_category">
+                        <parameter name="selectionList" value="AUTO"/>
+                    </element>
+                </row>
+                <row id="organizational_unit">
+                    <element attribute.idref="orgunit">
+                        <parameter name="selectionList" value="AUTO"/>
+                    </element>
+                </row>
+                <row id="application_system_type">
+                    <element attribute.idref="appsystem">
+                        <parameter name="selectionList" value="AUTO"/>
+                    </element>
+                </row>
+            </rowGroup>
+            <rowGroup id="riskassessment.2">
+                <row id="rm_notifications_qualitative">
+                    <element attribute.idref="rm_notifications_qualitative" >
+                        <javaScriptEvent expression="aam_objectcommand('cache');" name="onChange"/>
+                    </element>
+                </row>
+                <row id="th_impact_score">
+                    <element attribute.idref="th_impact_score">
+                        <parameter name="maxLength" value="20"/>
+                        <parameter name="size" value="20"/>
+                    </element>
+                </row>
+                <row id="th_red_impact_score">
+                    <element attribute.idref="th_red_impact_score">
+                        <parameter name="maxLength" value="20"/>
+                        <parameter name="size" value="20"/>
+                    </element>
+                </row>
+                <row id="rm_notifications_quantitative">
+                    <element attribute.idref="rm_notifications_quantitative" >
+                        <javaScriptEvent expression="aam_objectcommand('cache');" name="onChange"/>
+                    </element>
+                </row>
+
+                <row id="currency">
+                    <element attribute.idref="currency">
+                        <javaScriptEvent expression="aam_objectcommand('cache')" name="onChange"/>
+                    </element>
+                </row>
+                <row id="th_exp_min_loss">
+                    <element attribute.idref="th_exp_min_loss" template="stringEnum">
+                        <parameter name="enumProperty" value="currency"/>
+                        <parameter name="maxLength" value="20"/>
+                        <parameter name="size" value="20"/>
+                    </element>
+                </row>
+                <row id="th_exp_avg_loss">
+                    <element attribute.idref="th_exp_avg_loss" template="stringEnum">
+                        <parameter name="enumProperty" value="currency"/>
+                        <parameter name="maxLength" value="20"/>
+                        <parameter name="size" value="20"/>
+                    </element>
+                </row>
+                <row id="th_exp_max_loss">
+                    <element attribute.idref="th_exp_max_loss" template="stringEnum">
+                        <parameter name="enumProperty" value="currency"/>
+                        <parameter name="maxLength" value="20"/>
+                        <parameter name="size" value="20"/>
+                    </element>
+                </row>
+                <row id="th_red_exp_min_loss">
+                    <element attribute.idref="th_red_exp_min_loss" template="stringEnum">
+                        <parameter name="enumProperty" value="currency"/>
+                        <parameter name="maxLength" value="20"/>
+                        <parameter name="size" value="20"/>
+                    </element>
+                </row>
+                <row id="th_red_exp_avg_loss">
+                    <element attribute.idref="th_red_exp_avg_loss" template="stringEnum">
+                        <parameter name="enumProperty" value="currency"/>
+                        <parameter name="maxLength" value="20"/>
+                        <parameter name="size" value="20"/>
+                    </element>
+                </row>
+                <row id="th_red_exp_max_loss">
+                    <element attribute.idref="th_red_exp_max_loss" template="stringEnum">
+                        <parameter name="enumProperty" value="currency"/>
+                        <parameter name="maxLength" value="20"/>
+                        <parameter name="size" value="20"/>
+                    </element>
+                </row>
+                <row id="notification_to">
+                    <element attribute.idref="notification_to"/>
+                </row>
+            </rowGroup>
+        </page>
+    </form>    
+
+</custom>

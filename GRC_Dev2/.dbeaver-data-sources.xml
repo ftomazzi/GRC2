@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data-sources>
+	<data-source id="postgres-jdbc-15a923d4921-203c96c6fb7f4d61" provider="postgresql" driver="postgres-jdbc" name="PostgreSQL - cip" save-password="true" show-system-objects="true" read-only="false">
+		<connection host="localhost" port="16094" server="" database="cip" url="jdbc:postgresql://localhost:16094/cip" user="aris" password="WSU0CXJ/BUcBH18wK1Ultw==" type="dev">
+			<provider-property name="@dbeaver-show-non-default-db@" value="false"/>
+			<network-handler type="CONFIG" id="postgre_ssl" enabled="false" save-password="false"/>
+			<network-handler type="PROXY" id="socks_proxy" enabled="false" save-password="false">
+				<property name="socks-port" value="1080"/>
+			</network-handler>
+			<network-handler type="TUNNEL" id="ssh_tunnel" enabled="false" save-password="false">
+				<property name="sshConnectTimeout" value="10000"/>
+				<property name="port" value="22"/>
+				<property name="authType" value="PASSWORD"/>
+			</network-handler>
+		</connection>
+	</data-source>
+</data-sources>

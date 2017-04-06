@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../xsd/custom.xsd">
+    
+    <!-- Inicio GAP GRC29 -->
+    <!-- Redefinição das categorias de risco -->
+    <enum id="categderisco" isMultiple="false" type="Number">
+        <enumitem id="financial_reporting" value="1"/>
+        <enumitem id="compliance" value="2"/>
+        <enumitem id="operations" value="3"/>
+        <enumitem id="strategic" value="4"/>
+        <enumitem id="image" value="5"/>
+        <enumitem id="tecnology" value="6"/>
+    </enum>
+    
+    <!-- Redefinição da Frequencia de Controles -->
+    <enum id="custom_controlfreq" isMultiple="false" type="Number">
+        <enumitem id="all" value="-1" extendedMeaning="all"/>
+        <enumitem id="unspecified" value="0" extendedMeaning="please_select" filterRelevant="false"/>
+        <enumitem id="daily" value="1"/>
+        <enumitem id="monthly" value="3"/>
+        <enumitem id="quarterly" value="4"/>
+        <enumitem id="semiannually" value="5"/>
+        <enumitem id="annually" value="6"/>
+        <enumitem id="severally" value="8"/>
+        <enumitem id="eventually" value="9"/>
+        <!--
+        <enumitem id="weekly" value="2"/>
+        <enumitem id="semiannually" value="5"/>
+        <enumitem id="eventdriven" value="7"/>
+        -->
+    </enum>
+    
+    <!-- Redefinição das Classificações de Controle -->
+    <enum id="custom_controltype" isMultiple="false" type="Number">
+        <enumitem id="preventive" value="6"/>
+        <enumitem id="detective" value="7"/>
+    </enum>    
+    
+    <!-- Redefinição dos Tipos de Controle -->
+	<enum id="custom_controlexecution" isMultiple="false" type="Number">
+        <enumitem id="manual" value="1"/>
+        <enumitem id="it" value="2"/>
+        <enumitem id="automatic" value="3"/>
+    </enum>
+    <!-- Fim GAP GRC29 -->
+    
+	<!-- Inicio GAP GRC52 -->
+	<!-- Origem do teste -->
+    <enum id="origemteste" isMultiple="false" type="Number">
+        <enumitem id="all" value="-1" extendedMeaning="all" />
+        <enumitem id="1linhadefesa" value="1" />
+        <enumitem id="2linhadefesa" value="2" />                  
+    </enum>  
+    <!-- Final GAP GRC52 -->
+    
+    <!-- Inicio GAP GRC98 -->
+    <enum id="custom_controlexecstatus" isMultiple="false" type="Number">
+    	<enumitem id="effective" value="1" />
+    	<enumitem id="ineffective" value="2" />
+    </enum>
+    <!-- Fim GAP GRC98 -->
+    
+    <enum id="custom_enumactiontype" isMultiple="false" type="Number">
+    	<enumitem id="actionplan" value="1"/>
+    	<enumitem id="issue" value="2"/>
+    	<enumitem id="empty" value="3"/>
+    </enum>
+    
+    <!-- Inicio GAP - GRC66 -->
+    <enum id="cenum_is_creator_status" isMultiple="false" type="Number">
+    	<enumitem id="please_select" value="0" extendedMeaning="please_select" formRelevant="false" filterRelevant="false"/>
+    	<enumitem id="new" value="1" image="iconlib/icons/states/state_in_process_16.png"/>
+    	<enumitem id="in_review" value="2" image="iconlib/icons/states/state_running_16.png"/>
+    </enum>
+    
+    <enum id="cenum_is_owner_status" isMultiple="false" type="Number">
+    	<enumitem id="in_review" value="1" image="iconlib/icons/states/state_running_16.png"/>
+    	<enumitem id="open" value="2" image="iconlib/icons/states/state_in_process_16.png"/>
+    	<enumitem id="in_progress" value="3" image="iconlib/icons/states/state_in_process_16.png"/>
+    	<enumitem id="fup" value="4" image="iconlib/icons/states/state_warnings_16.png"/>
+		<!-- Status de Workflow -->
+    	<enumitem id="open_for_execution" value="5" virtualScope.idrefs="in_review,in_progress,fup" formRelevant="false" filterRelevant="false"/>
+    	<!-- / Status de Workflow -->       	
+    	<enumitem id="attended" value="6" image="iconlib/icons/states/state_auto_accepted_16.png"/>
+    	<enumitem id="risk_assumed" value="7" image="iconlib/icons/states/state_prio_high_16.png"/>
+    	<enumitem id="settled" value="8" image="iconlib/icons/states/state_prio_low_16.png"/>
+    	<!-- Status de Workflow -->
+    	<enumitem id="to_be_reviewed" value="9" virtualScope.idrefs="attended,risk_assumed,settled" formRelevant="false" filterRelevant="false"/>
+    	<!-- / Status de Workflow -->    	
+    </enum>
+    
+    <enum id="cenum_is_reviewer_status" isMultiple="false" type="Number">
+    	<enumitem id="to_be_reviewed" value="-1" virtualScope.idrefs="in_progress,fup" filterRelevant="false"/>
+    	<enumitem id="in_progress" value="1" image="iconlib/icons/states/state_in_process_16.png"/>
+    	<enumitem id="attended" value="2" image="iconlib/icons/states/state_auto_accepted_16.png"/>
+    	<enumitem id="risk_assumed" value="3" image="iconlib/icons/states/state_prio_high_16.png"/>
+    	<enumitem id="settled" value="4" image="iconlib/icons/states/state_prio_low_16.png"/>
+    	<!-- Status de Workflow -->
+    	<enumitem id="approved" value="5" virtualScope.idrefs="attended,risk_assumed,settled" formRelevant="false" filterRelevant="false"/>
+    	<!-- / Status de Workflow -->
+    	<enumitem id="fup" value="6" image="iconlib/icons/states/state_warnings_16.png"/>
+    </enum>
+    
+    <enum id="cenum_ap_creator_status" isMultiple="false" type="Number">
+    	<enumitem id="please_select" value="0" extendedMeaning="please_select" formRelevant="false" filterRelevant="false"/>
+    	<enumitem id="new" value="1" image="iconlib/icons/states/state_in_process_16.png"/>
+    	<enumitem id="pending" value="2" image="iconlib/icons/states/state_level_empty_16.png"/>
+    	<enumitem id="in_progress" value="3" image="iconlib/icons/states/state_in_process_16.png"/>
+    	<enumitem id="fup" value="4" image="iconlib/icons/states/state_warnings_16.png"/>
+    	<enumitem id="risk_assumed" value="5" image="iconlib/icons/states/state_prio_high_16.png"/>
+    	<!-- Status de Workflow -->
+    	<enumitem id="to_be_reviewed" value="6" virtualScope.idrefs="fup,risk_assumed" formRelevant="false" filterRelevant="false"/>
+    	<!-- / Status de Workflow -->
+    </enum>
+    
+    <enum id="cenum_ap_owner_status" isMultiple="false" type="Number">
+    	<enumitem id="in_progress" value="1" image="iconlib/icons/states/state_in_process_16.png"/>
+    	<enumitem id="pending" value="2" image="iconlib/icons/states/state_level_empty_16.png"/>
+    	<enumitem id="fup" value="3" image="iconlib/icons/states/state_warnings_16.png"/>
+    	<enumitem id="risk_assumed" value="4" image="iconlib/icons/states/state_prio_high_16.png"/>
+    	<!-- Status de Workflow -->
+    	<enumitem id="to_be_reviewed" value="5" virtualScope.idrefs="fup,risk_assumed" formRelevant="false" filterRelevant="false"/>
+    	<!-- / Status de Workflow -->
+    </enum>
+    
+    <enum id="cenum_ap_reviewer_status" isMultiple="false" type="Number">
+		<!-- Status de Workflow -->
+<!-- 		<enumitem id="in_reviewing" value="-1" virtualScope.idrefs="fup,risk_assumed" filterRelevant="false" /> -->
+    	<!-- / Status de Workflow -->
+    	<enumitem id="in_progress" value="1" image="iconlib/icons/states/state_in_process_16.png"/>
+    	<enumitem id="fup" value="2" image="iconlib/icons/states/state_warnings_16.png"/>
+    	<enumitem id="not_approved" value="3" image="iconlib/icons/content/error_16.png"/>
+    	<enumitem id="settled" value="4" image="iconlib/icons/states/state_prio_low_16.png"/>
+    	<enumitem id="attended" value="5" image="iconlib/icons/states/state_auto_accepted_16.png"/>
+    	<enumitem id="risk_assumed" value="6" image="iconlib/icons/states/state_prio_high_16.png"/>
+		<!-- Status de Workflow -->
+		<enumitem id="approved" value="7" virtualScope.idrefs="settled,attended" formRelevant="false" filterRelevant="false"/>
+		<enumitem id="to_be_approved" value="8" virtualScope.idrefs="fup,risk_assumed,in_progress" formRelevant="false" filterRelevant="false"/>
+    	<!-- / Status de Workflow -->    	
+    </enum>
+    <!-- Fim GAP - GRC66 --> 
+    
+</custom>
